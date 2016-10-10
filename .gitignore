@@ -12,3 +12,4 @@ nbproject/
 .project
 build.xml
 
+/target/
