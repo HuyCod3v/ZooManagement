@@ -1,0 +1,14 @@
+# java files ignore
+build/
+dist/
+bin/
+lib/
+*.class
+
+# Eclipse, Netbeans files ignore
+nbproject/
+.settings/
+.classpath
+.project
+build.xml
+

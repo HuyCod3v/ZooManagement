@@ -1,0 +1,29 @@
+#menu-sidebar {
+    background-color: #47d147;
+    height: 100%;
+    margin-right: 20px;
+    float: left;
+}
+
+#menu-sidebar li {
+    list-style-type: none;
+}
+
+#menu-sidebar a {
+    color: white;
+}
+
+#menu-sidebar ul {
+    padding: 0;
+}
+
+#menu-sidebar > ul > li > ul > li {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 30px;
+}
+
+#menu-sidebar > ul > li {
+    font-size: 22px;
+    padding: 10px 0;  
+}
