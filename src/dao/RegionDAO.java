@@ -1,21 +1,24 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import lib.ConnectDbLib;
 import model.Region;
+import utilities.DatabaseConnection;
 
 public class RegionDAO extends AbstractDAO {
 
-    public RegionDAO() {
-
-    }
-
-    public static ArrayList<Region> getAllRegions() {
+    public ArrayList<Region> getAll() {
         ArrayList<Region> regionList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        
         try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
+         
+            connection = DatabaseConnection.getConnection();
             String sql = "SELECT * FROM region";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
@@ -42,11 +45,14 @@ public class RegionDAO extends AbstractDAO {
         return regionList;
     }
 
-    public static Region getRegionById(String id) {
+    public Region find(String id) {
+
         Region region = null;
-        try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        try {          
+            connection = DatabaseConnection.getConnection();
             String sql = "SELECT * FROM region WHERE RegionID like ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, id);
@@ -73,4 +79,5 @@ public class RegionDAO extends AbstractDAO {
         return region;
 
     }
+
 }

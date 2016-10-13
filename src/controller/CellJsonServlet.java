@@ -9,6 +9,8 @@ import dao.CellDAO;
 import dao.RegionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +43,8 @@ public class CellJsonServlet extends HttpServlet {
             throws ServletException, IOException {
         String regionID = request.getParameter("regionID");
         JSONObject cell_json = new JSONObject();
-        for (Cell cell : CellDAO.getCellByRegion(regionID)) {
+        ArrayList<Cell> cells = new CellDAO().getByRegion(regionID);
+        for (Cell cell : cells) {
             try {
 				cell_json.put(cell.getCellID(), cell.getCellID());
 			} catch (JSONException e) {

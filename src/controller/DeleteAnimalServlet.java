@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.AnimalBO;
+import bo.AnimalBO;
 
 @WebServlet("/delete_animal")
 public class DeleteAnimalServlet extends HttpServlet {

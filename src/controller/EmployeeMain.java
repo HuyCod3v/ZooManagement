@@ -54,7 +54,7 @@ public class EmployeeMain extends HttpServlet {
 			String phone = request.getParameter("phone");
 			String address = request.getParameter("address");
 			User user = new model.User(employeeName, genderValue, birthday, phone, address);
-			userDAO.upadateUser(user,sUser.getEmployeeID());
+			userDAO.edit(user,sUser.getEmployeeID());
 			response.sendRedirect(request.getContextPath()+"/info-user?id="+user.getEmployeeID());
 		}
 	}

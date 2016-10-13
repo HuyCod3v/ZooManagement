@@ -1,21 +1,25 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import lib.ConnectDbLib;
 import model.Cell;
+import utilities.DatabaseConnection;
 
 public class CellDAO extends AbstractDAO {
 
-    public CellDAO() {
-    }
-
-    public static ArrayList<Cell> getAllCells() {
+    public ArrayList<Cell> getAll() {
         ArrayList<Cell> cellList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        
         try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
+           
+            connection = DatabaseConnection.getConnection();
             String sql = "SELECT * FROM cell";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
@@ -43,11 +47,13 @@ public class CellDAO extends AbstractDAO {
         return cellList;
     }
     
-    public static ArrayList<Cell> getCellByRegion(String RegionID) {
+    public ArrayList<Cell> getByRegion(String RegionID) {
         ArrayList<Cell> cellList = new ArrayList<>();
-        try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        try {       
+            connection = DatabaseConnection.getConnection();
             String sql = "select * from cell where RegionID = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, RegionID);
@@ -75,10 +81,5 @@ public class CellDAO extends AbstractDAO {
         }
         return cellList;
     }
-//    public static void main(String[] args) {
-//        ArrayList<Cell> cellList = CellDAO.getAllCells();
-//        for (Cell cell : cellList) {
-//            System.out.println(cell.getCellID());
-//        }
-//    }
+
 }

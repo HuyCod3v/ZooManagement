@@ -42,7 +42,7 @@ public class CheckLogin extends HttpServlet {
 		}else{
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
-			User user =userDAO.checkUserLogin(username, password);
+			User user =userDAO.find(username, password);
 			session.setAttribute("sUser", user);
 			if(user!=null){
 				response.sendRedirect(request.getContextPath()+"/ShowInfUser");

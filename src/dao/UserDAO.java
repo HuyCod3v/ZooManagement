@@ -3,20 +3,20 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import lib.ConnectDbLib;
 import model.User;
+import utilities.DatabaseConnection;
 
-public class UserDAO {
-	Connection con;
-	ConnectDbLib ConLib = new ConnectDbLib();
-	PreparedStatement pst;
-	ResultSet rs;
+public class UserDAO extends AbstractDAO {
 	
-	public User checkUserLogin(String username,String password){
+	
+	public User find(String username, String password){
 		User user=null;
+		PreparedStatement pst = null;
+        Connection con = null;
+        ResultSet rs = null;
+        
 		try{
-			con = ConLib.getConnectMySQL();
+			con = DatabaseConnection.getConnection();
 			String sql = "SELECT * FROM user as u join user_type as ut ON u.UserTypeID = ut.UserTypeID join employee as e ON u.Username LIKE e.Username WHERE u.Username LIKE ? AND u.Password LIKE ? LIMIT 1";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, username);
@@ -31,7 +31,7 @@ public class UserDAO {
 			try{
 				con.close();
 				pst.close();
-				ConLib.closeConnect();
+				rs.close();
 			}catch(Exception e){
 				
 			}
@@ -40,10 +40,12 @@ public class UserDAO {
 		return user;
 	}
 	
-	public void upadateUser(User user,String id){
-		con = ConLib.getConnectMySQL();
+	public void edit(User user,String id){
+		PreparedStatement pst = null;
+        Connection con = null;
 		String sql = "UPDATE employee SET EmployeeName = ?, Gender=? , Birthday= ?, Phone=?, Address=? WHERE EmployeeID LIKE ?";
 		try{
+			con = DatabaseConnection.getConnection();
 			pst = con.prepareStatement(sql);
 			pst.setString(1, user.getEmployeeName());
 			pst.setInt(2, user.getGender());
@@ -58,14 +60,17 @@ public class UserDAO {
 			try{
 				con.close();
 				pst.close();
-				ConLib.closeConnect();
+				
 			}catch(Exception e){
 				
 			}
 		}
 	}
-	public void upadatePassword(User user){
-		con = ConLib.getConnectMySQL();
+	
+	public void editPassword(User user){
+		PreparedStatement pst = null;
+        Connection con = null;
+		con = DatabaseConnection.getConnection();
 		String sql = "UPDATE user SET Password = ? WHERE Username LIKE ?";
 		try{
 			pst = con.prepareStatement(sql);
@@ -78,16 +83,18 @@ public class UserDAO {
 			try{
 				con.close();
 				pst.close();
-				ConLib.closeConnect();
 			}catch(Exception e){
 				
 			}
 		}
 	}
 	
-	public User getEmployeeByID(String id){
+	public User findById(String id){
 		User user = null;
-		con = ConLib.getConnectMySQL();
+		PreparedStatement pst = null;
+        Connection con = null;
+        ResultSet rs = null;
+		con = DatabaseConnection.getConnection();
 		String sql = "SELECT * FROM employee WHERE EmployeeID LIKE ? LIMIT 1";
 		try{
 			pst = con.prepareStatement(sql);
@@ -102,7 +109,7 @@ public class UserDAO {
 			try{
 				con.close();
 				pst.close();
-				ConLib.closeConnect();
+				rs.close();
 			}catch(Exception e){
 				
 			}

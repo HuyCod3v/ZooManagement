@@ -1,21 +1,23 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import lib.ConnectDbLib;
 import model.Species;
+import utilities.DatabaseConnection;
 
 public class SpeciesDAO extends AbstractDAO {
 
-    public SpeciesDAO() {
 
-    }
-
-    public static ArrayList<Species> getAllSpecies() {
+    public ArrayList<Species> getAll() {
         ArrayList<Species> speciesList = new ArrayList<>();
-        try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        try {       
+            connection = DatabaseConnection.getConnection();
             String sql = "SELECT * FROM species";
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();

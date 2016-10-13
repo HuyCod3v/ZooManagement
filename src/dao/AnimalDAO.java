@@ -1,83 +1,96 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Animal;
-import model.Cell;
-import model.Region;
 import model.Species;
-import lib.ConnectDbLib;
+import utilities.DatabaseConnection;
 
 public class AnimalDAO extends AbstractDAO {
 
-    public AnimalDAO() {
+    public boolean delete(String animalID) {
+        boolean success = false;
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
         
-    }
-
-    public static boolean deleteAnimal(String animalID) {
-        boolean ok = false;
         try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
-            String sql = "DELETE FROM animal WHERE AnimalID = ?";
-            preparedStatement = connection.prepareStatement(sql);
+            connection = DatabaseConnection.getConnection();
+            String SQL = "DELETE FROM animal WHERE AnimalID = ?";
+            preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, animalID);
-            ok = (preparedStatement.executeUpdate() == 1);
-
-        } catch (Exception ex) {
-
+            success = (preparedStatement.executeUpdate() == 1);
+        } catch (Exception exception) {
+        	exception.printStackTrace();
         } finally {
             try {
-                resultSet.close();
-                preparedStatement.close();
-                connection.close();
-            } catch (Exception ex) {
-
+            	if (preparedStatement != null) {
+            		preparedStatement.close();
+            	}
+                if (connection != null) {
+                	connection.close();
+                }            
+            } catch (Exception exception) {
+            	exception.printStackTrace();
             }
         }
-        return ok;
-
+        
+        return success;
     }
 
-    public static boolean updateAnimal(Animal updatedAnimal) {
-        boolean ok = false;
+    public boolean edit(Animal animal) {
+    	boolean success = false;
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        
         try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
-            String sql = "UPDATE animal SET AnimalName = ?, SpeciesID = ?, Gender = ?, Weight = ?, Height = ?, HealthStatus = ?, Description = ?, CellID = ? WHERE AnimalID = ?";
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, updatedAnimal.getAnimalName());
-            preparedStatement.setString(2, updatedAnimal.getSpeciesID());
-            preparedStatement.setInt(3, updatedAnimal.getGender());
-            preparedStatement.setDouble(4, updatedAnimal.getWeight());
-            preparedStatement.setDouble(5, updatedAnimal.getHeight());
-            preparedStatement.setString(6, updatedAnimal.getHealthStatus());
-            preparedStatement.setString(7, updatedAnimal.getDescription());
-            preparedStatement.setString(8, updatedAnimal.getCellID());
-            preparedStatement.setString(9, updatedAnimal.getAnimalID());
-            ok = (preparedStatement.executeUpdate() == 1);
-        } catch (Exception ex) {
-
+        	connection = DatabaseConnection.getConnection();         
+            
+        	String SQL = "UPDATE animal SET AnimalName = ?, SpeciesID = ?, Gender = ?, Weight = ?, Height = ?, HealthStatus = ?, Description = ?, CellID = ? WHERE AnimalID = ?";
+            
+            preparedStatement = connection.prepareStatement(SQL);            
+            preparedStatement.setString(1, animal.getAnimalName());
+            preparedStatement.setString(2, animal.getSpeciesID());
+            preparedStatement.setInt(3, animal.getGender());
+            preparedStatement.setDouble(4, animal.getWeight());
+            preparedStatement.setDouble(5, animal.getHeight());
+            preparedStatement.setString(6, animal.getHealthStatus());
+            preparedStatement.setString(7, animal.getDescription());
+            preparedStatement.setString(8, animal.getCellID());
+            preparedStatement.setString(9, animal.getAnimalID());
+            success = (preparedStatement.executeUpdate() == 1);
+        } catch (Exception exception) {
+        	exception.printStackTrace();
         } finally {
             try {
-                resultSet.close();
-                preparedStatement.close();
-                connection.close();
-            } catch (Exception ex) {
-
+                if (preparedStatement != null) {
+                	preparedStatement.close();
+                }
+                if (connection != null) {
+                	connection.close();
+                }                              
+            } catch (Exception exception) {
+            	exception.printStackTrace();
             }
         }
-        return ok;
+        
+        return success;
     }
 
-    public static ArrayList<Animal> getAllAnimals() {
-        ArrayList<Animal> animalList = new ArrayList<Animal>();
+    public  List<Animal> getAll() {
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        List<Animal> animals = new ArrayList<Animal>();
+        
         try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
-            String sql = "SELECT * FROM animal an LEFT JOIN cell cl ON an.CellID = cl.CellID LEFT JOIN region rg ON cl.RegionID = rg.RegionID LEFT JOIN species sc ON an.SpeciesID = sc.SpeciesID";
-            preparedStatement = connection.prepareStatement(sql);
+        	connection = DatabaseConnection.getConnection(); 
+            String SQL = "SELECT * FROM animal an LEFT JOIN cell cl ON an.CellID = cl.CellID LEFT JOIN region rg ON cl.RegionID = rg.RegionID LEFT JOIN species sc ON an.SpeciesID = sc.SpeciesID";
+            preparedStatement = connection.prepareStatement(SQL);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Animal animal = new Animal(resultSet.getString("AnimalID"),
@@ -95,31 +108,40 @@ public class AnimalDAO extends AbstractDAO {
                         resultSet.getString("SpeciesName"),
                         resultSet.getString("Description"));
                 animal.setSpecies(species);
-                animalList.add(animal);
+                animals.add(animal);
             }
 
-        } catch (Exception ex) {
-
+        } catch (Exception exception) {
+        	exception.printStackTrace();
         } finally {
             try {
-                resultSet.close();
-                preparedStatement.close();
-                connection.close();
-            } catch (Exception ex) {
-
+            	if (resultSet != null) {
+            		resultSet.close();
+            	}
+            	if (preparedStatement != null) {
+            		preparedStatement.close();
+            	}
+                if (connection != null) {
+                	connection.close();
+                }                              
+            } catch (Exception exception) {
+            	exception.printStackTrace();
             }
         }
 
-        return animalList;
+        return animals;
     }
 
-    public static Animal getAnimalById(String id) {
+    public Animal find(String id) {
         Animal animal = null;
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        
         try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
-            String sql = "SELECT * FROM animal an LEFT JOIN cell cl ON an.CellID = cl.CellID LEFT JOIN region rg ON cl.RegionID = rg.RegionID LEFT JOIN species sc ON an.SpeciesID = sc.SpeciesID WHERE an.AnimalID = ?";
-            preparedStatement = connection.prepareStatement(sql);
+            connection = DatabaseConnection.getConnection();
+            String SQL = "SELECT * FROM animal an LEFT JOIN cell cl ON an.CellID = cl.CellID LEFT JOIN region rg ON cl.RegionID = rg.RegionID LEFT JOIN species sc ON an.SpeciesID = sc.SpeciesID WHERE an.AnimalID = ?";
+            preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -155,11 +177,14 @@ public class AnimalDAO extends AbstractDAO {
         return animal;
     }
     
-    public static ArrayList<Animal> searchAnimalByRegion(String regionId) {
+    public ArrayList<Animal> getByRegion(String regionId) {
     	ArrayList<Animal> animalList = new ArrayList<Animal>();
+    	PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        
         try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
+            connection = DatabaseConnection.getConnection();
             String sql = "SELECT * FROM animal an LEFT JOIN cell cl ON an.CellID = cl.CellID LEFT JOIN region rg ON cl.RegionID = rg.RegionID LEFT JOIN species sc ON an.SpeciesID = sc.SpeciesID WHERE cl.RegionID = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, regionId);
@@ -198,11 +223,14 @@ public class AnimalDAO extends AbstractDAO {
         return animalList;
     }
     
-    public static ArrayList<Animal> searchAnimalByCell(String cellId) {
+    public ArrayList<Animal> getByCell(String cellId) {
     	ArrayList<Animal> animalList = new ArrayList<Animal>();
-        try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
+    	PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        
+        try {        
+            connection = DatabaseConnection.getConnection();
             String sql = "SELECT * FROM animal an LEFT JOIN cell cl ON an.CellID = cl.CellID LEFT JOIN region rg ON cl.RegionID = rg.RegionID LEFT JOIN species sc ON an.SpeciesID = sc.SpeciesID WHERE an.CellID = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, cellId);
@@ -241,11 +269,13 @@ public class AnimalDAO extends AbstractDAO {
         return animalList;
     }
 
-    public static ArrayList<Animal> searchAnimalById(String id) {
+    public ArrayList<Animal> getById(String id) {
         ArrayList<Animal> animalList = new ArrayList<Animal>();
-        try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        try {         
+        	connection = DatabaseConnection.getConnection();
             String sql = "SELECT * FROM animal an LEFT JOIN cell cl ON an.CellID = cl.CellID LEFT JOIN region rg ON cl.RegionID = rg.RegionID LEFT JOIN species sc ON an.SpeciesID = sc.SpeciesID WHERE an.AnimalID LIKE ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, "%" + id + "%");
@@ -284,11 +314,12 @@ public class AnimalDAO extends AbstractDAO {
         return animalList;
     }
 
-    public static boolean addNewAnimal(Animal newAnimal) {
+    public boolean add(Animal newAnimal) {
         boolean ok = false;
-        try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        try {           
+            connection = DatabaseConnection.getConnection();
             String sql = "INSERT INTO animal (AnimalID, AnimalName, SpeciesID, Gender, "
                                            + "Weight, Height, HealthStatus, Description, CellID) "
                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -323,7 +354,6 @@ public class AnimalDAO extends AbstractDAO {
             System.out.println(ex.getMessage());
         } finally {
             try {
-                resultSet.close();
                 preparedStatement.close();
                 connection.close();
             } catch (Exception ex) {
@@ -333,11 +363,13 @@ public class AnimalDAO extends AbstractDAO {
         return ok;
     }
     
-    public static ArrayList<Animal> searchAnimalBySpecies(String speciesId) {
+    public ArrayList<Animal> getBySpecies(String speciesId) {
     	ArrayList<Animal> animalList = new ArrayList<Animal>();
-        try {
-            dbAccess = new ConnectDbLib();
-            connection = dbAccess.getConnectMySQL();
+    	PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        try {           
+            connection = DatabaseConnection.getConnection();
             String sql = "SELECT * FROM animal an LEFT JOIN cell cl ON an.CellID = cl.CellID LEFT JOIN region rg ON cl.RegionID = rg.RegionID LEFT JOIN species sc ON an.SpeciesID = sc.SpeciesID WHERE an.SpeciesID = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, speciesId);

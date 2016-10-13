@@ -34,7 +34,7 @@ public class ChangePassUser extends HttpServlet {
 			if(old_password.equals(sUser.getPassword())){
 				String password = request.getParameter("new_password");
 				User user = new User(sUser.getUsername(), password);
-				userDAO.upadatePassword(user);
+				userDAO.editPassword(user);
 				response.sendRedirect(request.getContextPath()+"/info-user?msg=1");
 			}else{
 				response.sendRedirect(request.getContextPath()+"/changepass.jsp?msg=0");

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bo.AnimalBO;
 import model.Animal;
-import dao.AnimalBO;
 
 @WebServlet("/animals_by_id")
 public class SearchAnimalByIDServlet extends HttpServlet {

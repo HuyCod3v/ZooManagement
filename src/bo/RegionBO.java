@@ -1,7 +1,8 @@
-package dao;
+package bo;
 
 import java.util.ArrayList;
 
+import dao.RegionDAO;
 import model.Region;
 
 public class RegionBO {
@@ -9,10 +10,10 @@ public class RegionBO {
 	
 	public ArrayList<Region> getAllRegions() {
 		regionDAO = new RegionDAO();
-		return regionDAO.getAllRegions();
+		return regionDAO.getAll();
 	}
 	public Region getRegionById(String id) {
 		regionDAO = new RegionDAO();
-		return regionDAO.getRegionById(id);
+		return regionDAO.find(id);
 	}
 }

@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,11 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bo.CellBO;
+import bo.RegionBO;
+import bo.SpeciesBO;
 import dao.AnimalDAO;
-import dao.CellBO;
-import dao.RegionBO;
 import dao.RegionDAO;
-import dao.SpeciesBO;
 import model.Animal;
 import model.Cell;
 import model.Region;
@@ -49,7 +50,7 @@ public class AnimalMain extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
-		ArrayList<Animal> animalList = new AnimalDAO().getAllAnimals();	
+		List<Animal> animalList = new AnimalDAO().getAll();	
 		ArrayList<Region> regionList = new RegionBO().getAllRegions();
 		ArrayList<Cell> cellList = new CellBO().getAllCells();
 		ArrayList<Species> speciesList = new SpeciesBO().getAllSpecies();

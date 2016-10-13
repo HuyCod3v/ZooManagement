@@ -56,7 +56,7 @@ public class UpdateAnimal extends HttpServlet {
 			String cellID = request.getParameter("cell_id");
 			
 			Animal animal = new Animal(animalID, animalName, speciesID, gender, Double.parseDouble(height), Double.parseDouble(weight), healthStatus, description, cellID);
-			boolean ok = new AnimalDAO().updateAnimal(animal);
+			boolean ok = new AnimalDAO().edit(animal);
 			if (ok) {
 				response.sendRedirect(request.getContextPath() + "/animal-management");
 			}
@@ -73,10 +73,10 @@ public class UpdateAnimal extends HttpServlet {
 	
 	public void showEditAnimal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String animalID = request.getParameter("animal_id");
-		Animal animal = new AnimalDAO().getAnimalById(animalID);
-		ArrayList<Species> speciesList = new SpeciesDAO().getAllSpecies();
-		ArrayList<Region> regionList = new RegionDAO().getAllRegions();
-		ArrayList<Cell> cellList = new CellDAO().getAllCells();
+		Animal animal = new AnimalDAO().find(animalID);
+		ArrayList<Species> speciesList = new SpeciesDAO().getAll();
+		ArrayList<Region> regionList = new RegionDAO().getAll();
+		ArrayList<Cell> cellList = new CellDAO().getAll();
 		request.setAttribute("species_list", speciesList);
 		request.setAttribute("region_list", regionList);
 		request.setAttribute("cell_list", cellList);

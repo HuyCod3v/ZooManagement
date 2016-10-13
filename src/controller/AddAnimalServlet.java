@@ -89,7 +89,7 @@ public class AddAnimalServlet extends HttpServlet {
 //        Animal animal = new Animal(animalID, animalName, speciesID, gender,
 //                                   Double.parseDouble(height), Double.parseDouble(weight),
 //                                   healthStatus, description, cellID);
-        ok = AnimalDAO.addNewAnimal(animal);
+        ok = new AnimalDAO().add(animal);
         if (ok) {
             response.sendRedirect(request.getContextPath() + "/animal-management");
         } else {
