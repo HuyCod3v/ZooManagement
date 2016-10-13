@@ -21,12 +21,12 @@ public class DatabaseConnection {
 	}
 	
 	public static Connection getConnection() {
-		return getMySQLConnection();
+		return getMSSQLConnection();
 	}
 	
 	private static Connection getMSSQLConnection() {
 		Connection connection = null;
-		String URL = "jdbc:sqlserver://" + Configuration.MSSQL_HOST + ";databaseName=" + Configuration.MSSQL_DATABASE;
+		String URL = "jdbc:sqlserver://" + Configuration.MSSQL_HOST + ";instanceName=SQLEXPRESS;databaseName=" + Configuration.MSSQL_DATABASE;
 		
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

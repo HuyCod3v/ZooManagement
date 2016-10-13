@@ -2,7 +2,7 @@ package utilities;
 
 public class Configuration {
 	
-	public static final String MSSQL_HOST = "S0TE6RO6A4D5GL3\\SQLEXPRESS";
+	public static final String MSSQL_HOST = "localhost:1434";
 	public static final String MSSQL_DATABASE = "ZooManagement";
 	public static final String MSSQL_USER = "sa";
 	public static final String MSSQL_PASSWORD = "12345678";
