@@ -17,7 +17,7 @@ public class UserDAO extends AbstractDAO {
         
 		try{
 			con = DatabaseConnection.getConnection();
-			String sql = "SELECT * FROM user as u join user_type as ut ON u.UserTypeID = ut.UserTypeID join employee as e ON u.Username LIKE e.Username WHERE u.Username LIKE ? AND u.Password LIKE ? LIMIT 1";
+			String sql = "SELECT * FROM [User] u join UserType ut ON u.UserTypeID = ut.UserTypeID join Employee e ON u.EmployeeID = e.EmployeeID WHERE u.Username = ? AND u.Password = ?";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, username);
 			pst.setString(2, password);
@@ -26,14 +26,14 @@ public class UserDAO extends AbstractDAO {
 				user = new User(rs.getString("Username"), rs.getString("Password"), rs.getInt("UserTypeID"), rs.getString("UserTypeName"), rs.getString("EmployeeID"), rs.getString("EmployeeName"), rs.getInt("Gender"),rs.getString("Birthday"), rs.getString("Phone"), rs.getString("Address"));
 			}
 		}catch(Exception e){
-			System.out.println("Lỗi cmnr");
+			e.printStackTrace();
 		}finally {
 			try{
 				con.close();
 				pst.close();
 				rs.close();
 			}catch(Exception e){
-				
+				e.printStackTrace();
 			}
 		}
 		
@@ -95,7 +95,7 @@ public class UserDAO extends AbstractDAO {
         Connection con = null;
         ResultSet rs = null;
 		con = DatabaseConnection.getConnection();
-		String sql = "SELECT * FROM employee WHERE EmployeeID LIKE ? LIMIT 1";
+		String sql = "SELECT * FROM [Employee] WHERE EmployeeID = ?";
 		try{
 			pst = con.prepareStatement(sql);
 			pst.setString(1, id);

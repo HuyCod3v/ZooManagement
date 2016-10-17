@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-	<%@include file="/inc/header.jsp" %>
+	<%@include file="/templates/header.jsp" %>
   <title>Đăng nhập</title>
   <style type="text/css">
   body{

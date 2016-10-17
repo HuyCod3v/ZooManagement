@@ -51,7 +51,7 @@ public class AnimalMain extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
 		List<Animal> animalList = new AnimalDAO().getAll();	
-		ArrayList<Region> regionList = new RegionBO().getAllRegions();
+		List<Region> regionList = new RegionBO().getAll();
 		ArrayList<Cell> cellList = new CellBO().getAllCells();
 		ArrayList<Species> speciesList = new SpeciesBO().getAllSpecies();
 		request.setAttribute("animal_list", animalList);

@@ -2,7 +2,7 @@
 <%@page import="model.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@include file="/inc/header.jsp" %>
+<%@include file="/templates/header.jsp" %>
 <title>Thông tin cá nhân</title>
 <style>
 	table{
@@ -19,29 +19,14 @@
 
       </div>
     </div>
-    <div id="navitication" class="col-md-3">
-      <ul>
-        <li><a href="#">Quản lý động vật</a>
-          <ul>
-            <li><a href="#">Khu vực</a></li>
-            <li><a href="#">Chuồng</a></li>
-            <li><a href=<%=request.getContextPath() + "/animal-management" %>>Động vật</a></li>
-          </ul>
-        </li>
-        <li><a href="<%=request.getContextPath()%>/info-user">Quản lý nhân viên</a>
-        </li>
-        <li><a href="#">Quản lý thức ăn</a>
-        </li>
-        <li><a href="#">Quản lý vé</a></li>
-      </ul>
-    </div>
+    <jsp:include page= "/templates/menu-sidebar.jsp" />
 
 
 
 	<%
 		User sUser =(User) session.getAttribute("sUser");
 		UserDAO userDAO = new UserDAO();
-		User u = userDAO.getEmployeeByID(sUser.getEmployeeID());
+		User u = userDAO.findById(sUser.getEmployeeID());
 	%>
 	<div class="col-md-7" >
 	<label style="margin-left: 1px; margin-top: 20px; font-size: 20px;">Thông tin nhân viên</label>

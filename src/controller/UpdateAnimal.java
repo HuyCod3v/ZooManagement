@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -75,7 +76,7 @@ public class UpdateAnimal extends HttpServlet {
 		String animalID = request.getParameter("animal_id");
 		Animal animal = new AnimalDAO().find(animalID);
 		ArrayList<Species> speciesList = new SpeciesDAO().getAll();
-		ArrayList<Region> regionList = new RegionDAO().getAll();
+		List<Region> regionList = new RegionDAO().getAll();
 		ArrayList<Cell> cellList = new CellDAO().getAll();
 		request.setAttribute("species_list", speciesList);
 		request.setAttribute("region_list", regionList);
