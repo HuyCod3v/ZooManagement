@@ -19,7 +19,9 @@ public class DatabaseConnection {
 		
 		return connection;
 	}
-	
+	public static Connection getConnectionMySQL() {
+		return getMySQLConnection();
+	}
 	public static Connection getConnection() {
 		return getMSSQLConnection();
 	}
