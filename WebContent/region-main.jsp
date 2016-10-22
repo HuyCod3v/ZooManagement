@@ -22,8 +22,19 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
+                    	
                         <div class="panel-heading">
-                            Danh sách các khu vực
+                        	<div class="row">
+                        		<div class="col-lg-11">                      	
+	                    			Danh sách các khu vực
+	                    		</div>
+	                    		<div class="col-lg-1">
+	                    			<button type="button" class="btn btn-success btn-circle">
+	                                        		<i class="fa fa-plus" aria-hidden="true"></i>
+                           						 </button>
+	                    		</div>    
+                        	</div>
+                        	                    
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -35,6 +46,7 @@
                                         <th>Diện tích khu vực</th>
                                         <th>Mô tả</th>
                                         <th>Tình trạng khu vực</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,6 +58,15 @@
 	                                        <td>${region.regionArea}</td>
 	                                        <td>${region.description}</td>
 	                                        <td>${region.regionStatus.regionStatusName}</td>
+	                                        <td>
+	                                        	<button type="button" class="btn btn-info btn-circle">
+	                                        		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                           						 </button>
+	                                        	
+	                                        	<button type="button" id="delete-region-action" class="btn btn-danger btn-circle" data-region-id="${region.regionID}" data-toggle="modal" data-target="#delete-region-modal">
+	                                        		<i class="fa fa-trash" aria-hidden="true"></i>
+                           						 </button>
+	                                        </td>
 	                                    </tr>   
                                 	                                                             
                                 </c:forEach>
@@ -57,6 +78,39 @@
             </div>
 		</div>	
 	</div>
+	
+	<div class="modal fade" id="delete-region-modal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">    
+	      <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <div>Xác nhận</div>
+	        </div>   
+        <div class="modal-body" style="padding:10px 10px;">
+          <form role="form">
+          	  <div>Bạn có muốn xóa khu vực <label id="region-id"></label> không ?</div>                                         
+          </form>
+        </div>     
+        
+        <div class="modal-footer">
+        	<button type="submit" class="btn btn-info btn-default pull-left" data-dismiss="modal"><span class="fa fa-check"></span> Có</button>
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="fa fa-ban"></span> Không</button>    
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  
 	<jsp:include page="/templates/footer.jsp" />
+	
+	<script type="text/javascript">
+		$(document).on("click", "#delete-region-action", function () {
+		     var regionId = $(this).data('region-id');
+		     $(".modal-body #region-id").html(regionId);		    
+		});
+	</script>
 </body>
 </html>

@@ -22,6 +22,7 @@ body {
     border-left: 1px solid #e7e7e7;
   }
 }
+
 .navbar-top-links {
   margin-right: 0;
 }
@@ -402,6 +403,7 @@ table.dataTable thead .sorting:after {
 .timeline-body > p + p {
   margin-top: 5px;
 }
+
 @media (max-width: 767px) {
   ul.timeline:before {
     left: 40px;
