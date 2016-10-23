@@ -13,3 +13,5 @@ nbproject/
 build.xml
 
 /target/
+/src/utilities/Configuration.java
+/src/utilities/DatabaseConnection.java
