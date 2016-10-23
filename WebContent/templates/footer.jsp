@@ -27,6 +27,8 @@
 
 <script src="<c:url value="/resources/js/sb-admin-2.js"/>"></script>
 
+<!-- date-picker-js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -34,4 +36,9 @@
             responsive: true
         });
     });
-    </script>
+    $(function(){
+    	   $('.datepicker').datepicker({
+    	      format: 'yyyy-mm-dd'
+    	    });
+    	});
+</script>

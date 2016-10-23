@@ -214,7 +214,11 @@
 						Quản lý công việc</a></li>
 				
 				
-				<li><a href="#"><i class="fa fa-files-o fa-fw"></i> Quản lý nhân viên<span class="fa arrow"></span></a></li>
+				<li><a href="/ZooManagement/employee"><i class="fa fa-user fa-fw"></i> Quản lý nhân viên<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="/ZooManagement/employee">Nhân Viên</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 		<!-- /.sidebar-collapse -->
