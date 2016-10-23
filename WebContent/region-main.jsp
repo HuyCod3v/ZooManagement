@@ -29,9 +29,9 @@
 	                    			Danh sách các khu vực
 	                    		</div>
 	                    		<div class="col-lg-1">
-	                    			<button type="button" class="btn btn-success btn-circle">
+	                    			<a class="btn btn-success btn-circle" href='<c:url value="/regions-add"/>'>
 	                                        		<i class="fa fa-plus" aria-hidden="true"></i>
-                           						 </button>
+                           						 </a>
 	                    		</div>    
                         	</div>
                         	                    
@@ -59,9 +59,9 @@
 	                                        <td>${region.description}</td>
 	                                        <td>${region.regionStatus.regionStatusName}</td>
 	                                        <td>
-	                                        	<button type="button" class="btn btn-info btn-circle">
+	                                        	<a class="btn btn-info btn-circle" href='<c:url value="/regions-edit?id=${region.regionID }"/>'>
 	                                        		<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                           						 </button>
+                           						 </a>
 	                                        	
 	                                        	<button type="button" id="delete-region-action" class="btn btn-danger btn-circle" data-region-id="${region.regionID}" data-toggle="modal" data-target="#delete-region-modal">
 	                                        		<i class="fa fa-trash" aria-hidden="true"></i>

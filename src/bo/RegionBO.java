@@ -15,7 +15,7 @@ public class RegionBO {
 	public List<Region> getAll() {
 		return regionDAO.getAll();
 	}
-	public Region getRegionById(String id) {
+	public Region find(String id) {
 		return regionDAO.find(id);
 	}
 }
