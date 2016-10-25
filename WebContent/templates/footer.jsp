@@ -30,6 +30,10 @@
 <!-- date-picker-js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 
+<!-- JQuery Validation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/additional-methods.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import bo.RegionBO;
+import bo.RegionStatusBO;
 import model.Region;
+import model.RegionStatus;
 
 @WebServlet("/regions-add")
 public class ShowAddRegionServlet extends HttpServlet {
@@ -24,10 +26,10 @@ public class ShowAddRegionServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		
-		RegionBO regionBO = new RegionBO();
-		List<Region> regions = regionBO.getAll();
+		RegionStatusBO regionStatusBO = new RegionStatusBO();
+		List<RegionStatus> statusList = regionStatusBO.getAll();
+		request.setAttribute("statusList", statusList);
 	
-		request.setAttribute("regions", regions);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("region-add.jsp");	
 		dispatcher.forward(request, response);
 		

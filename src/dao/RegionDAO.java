@@ -19,7 +19,7 @@ public class RegionDAO extends AbstractDAO {
         
         try {        
             connection = DatabaseConnection.getConnection();
-            String SQL = "SELECT * FROM [Region] r JOIN RegionStatus rs ON r.RegionStatusID = rs.RegionStatusID";
+            String SQL = "SELECT * FROM Region r JOIN RegionStatus rs ON r.RegionStatusID = rs.RegionStatusID";
             preparedStatement = connection.prepareStatement(SQL);
             resultSet = preparedStatement.executeQuery();
             
