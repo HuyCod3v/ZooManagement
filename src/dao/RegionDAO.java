@@ -91,4 +91,62 @@ public class RegionDAO extends AbstractDAO {
         return region;
     }
     
+    public boolean add(Region region) {    
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;      
+        boolean success = false;
+        try {          
+            connection = DatabaseConnection.getConnection();
+            String sql = "INSERT INTO Region(RegionID, RegionName, RegionArea, RegionStatusID, Description) VALUES"
+            		+ " (?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, region.getRegionID());
+            preparedStatement.setString(2, region.getRegionName());
+            preparedStatement.setDouble(3, region.getRegionArea());
+            preparedStatement.setInt(4, region.getRegionStatusID());
+            preparedStatement.setString(5, region.getDescription());
+            
+            success = preparedStatement.executeUpdate() > 0;
+
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        } finally {
+            try {
+            
+                preparedStatement.close();
+                connection.close();
+            } catch (Exception exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
+        
+        return success;
+    }
+    
+    public boolean delete(String regionID) {
+    	PreparedStatement preparedStatement = null;
+        Connection connection = null;      
+        boolean success = false;
+        try {          
+            connection = DatabaseConnection.getConnection();
+            String sql = "DELETE FROM Region WHERE RegionID = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, regionID);     
+            success = preparedStatement.executeUpdate() > 0;
+
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        } finally {
+            try {
+            
+                preparedStatement.close();
+                connection.close();
+            } catch (Exception exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
+        
+        return success;
+    }
+    
 }

@@ -95,8 +95,14 @@
         </div>     
         
         <div class="modal-footer">
-        	<button type="submit" class="btn btn-info btn-default pull-left" data-dismiss="modal"><span class="fa fa-check"></span> Có</button>
-          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="fa fa-ban"></span> Không</button>    
+        
+        	<form method="get" role="form" action='<c:url value="/regions-handle-delete"/>'>
+        		<input type="hidden" name="regionID" id="region-id-submit"/>
+        		<button type="submit" class="btn btn-info btn-default pull-left" data-dismiss="modal"><span class="fa fa-check"></span> Có</button>
+          		<button type="button" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="fa fa-ban"></span> Không</button>
+        	</form>
+        
+        	    
         </div>
       </div>
       
@@ -109,7 +115,8 @@
 	<script type="text/javascript">
 		$(document).on("click", "#delete-region-action", function () {
 		     var regionId = $(this).data('region-id');
-		     $(".modal-body #region-id").html(regionId);		    
+		     $(".modal-body #region-id").html(regionId);
+		     $("#region-id-submit").val(regionId);		
 		});
 	</script>
 </body>

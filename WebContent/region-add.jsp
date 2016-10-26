@@ -27,7 +27,7 @@
             			
             			<div class="panel-body">
             				<div class="col-lg-9">
-            					<form role="form" id="addRegionForm" method="post" action="">
+            					<form role="form" id="addRegionForm" method="post" action='<c:url value="/regions-handle-add"/>'>
             							<div class="form-group">
                                             <label for="regionID">Mã khu vực (*)</label>
                                             <input id="regionID" class="form-control" name="regionID" maxlength="10" required>                                      
