@@ -27,36 +27,53 @@
             			
             			<div class="panel-body">
             				<div class="col-lg-9">
-            					<form role="form">
+            					<form role="form" id="editRegionForm" method="post" action='<c:url value="/regions-handle-edit"/>'>
             							<div class="form-group">
-                                            <label>Mã khu vực</label>
-                                            <input class="form-control" disabled value="${region.regionID }">                                      
+                                            <label for="regionID">Mã khu vực</label>
+                                            <input class="form-control" readonly="readonly" value="${region.regionID }" name="regionID" maxlength="10" required id="regionID">                                      
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label>Tên khu vực</label>
-                                            <input class="form-control" value="${region.regionName }">                                      
+                                            <label for="regionName">Tên khu vực</label>
+                                            <input class="form-control" value="${region.regionName }" maxlength="30" required name="regionName" id="regionName">                                      
                                         </div>	
                                         
                                         <div class="form-group">
-                                            <label>Diện tích</label>
-                                            <input class="form-control" value="${region.regionArea }">                                      
+                                            <label for="regionArea">Diện tích</label>
+                                            <input class="form-control" value="${region.regionArea }" name="regionArea" type="number" min="0" max="65535" id="regionArea">                                      
                                         </div>	
                                         
                                         <div class="form-group">
-                                            <label>Mô tả</label>
-                                            <textarea class="form-control" rows="3" >${region.description }</textarea>
+                                            <label for="description">Mô tả</label>
+                                            <textarea class="form-control" rows="3" name="description" maxlength="1000" id="description">${region.description }</textarea>
                                         </div>			
             							
             							<div class="form-group">
                                             <label>Tình trạng khu vực</label>
                                             
                                             <c:forEach var="status" items="${requestScope.statusList}">
-                                            	<div class="radio">                                        		
-	                                                <label>
-	                                                    <input type="radio" name="regionStatusID" value="${status.regionStatusID }">${status.regionStatusName}
-	                                                </label>
-	                                            </div>
+                                            	<c:choose>
+                                            		<c:when test="${status.regionStatusID == region.regionStatusID}">
+                                            			<div class="radio">                                        		
+			                                                <label>
+			                                                    <input type="radio" checked name="regionStatusID" value="${status.regionStatusID }">${status.regionStatusName}
+			                                                </label>
+			                                            </div>
+                                            		
+                                            		</c:when>
+                                            	
+                                            		<c:otherwise>
+
+													<div class="radio">
+														<label> <input type="radio" name="regionStatusID"
+															value="${status.regionStatusID }">${status.regionStatusName}
+														</label>
+													</div>
+
+												</c:otherwise>
+                                            	
+                                            	</c:choose>
+                                            	
                                             
                                             </c:forEach>
                                                                                                                                                                          
@@ -81,6 +98,10 @@
 
 
 	<jsp:include page="/templates/footer.jsp" />
+	
+	<script>
+		$("#editRegionForm").validate();
+	</script>
 
 </body>
 </html>

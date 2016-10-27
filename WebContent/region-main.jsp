@@ -15,7 +15,14 @@
 		<div id="page-wrapper">
 			<div class="row">
                 <div class="col-lg-12">
-                    <h3 class="page-header">Quản lý khu vực</h1>
+                    <h3 class="page-header">Quản lý khu vực</h3>
+                    <c:if test="${requestScope.error != null}">
+                    	<div class="red-text"><c:out value="${requestScope.error }"/></div>
+                    </c:if>
+                    
+                    <c:if test="${requestScope.success != null}">
+                    	<div class="green-text"><c:out value="${requestScope.success }"/></div>
+                    </c:if>
                 </div>
             </div>
             
@@ -98,7 +105,7 @@
         
         	<form method="get" role="form" action='<c:url value="/regions-handle-delete"/>'>
         		<input type="hidden" name="regionID" id="region-id-submit"/>
-        		<button type="submit" class="btn btn-info btn-default pull-left" data-dismiss="modal"><span class="fa fa-check"></span> Có</button>
+        		<button type="submit" class="btn btn-info btn-default pull-left"><span class="fa fa-check"></span> Có</button>
           		<button type="button" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="fa fa-ban"></span> Không</button>
         	</form>
         

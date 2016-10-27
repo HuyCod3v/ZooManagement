@@ -13,11 +13,11 @@ import bo.RegionStatusBO;
 import model.Region;
 import model.RegionStatus;
 
-@WebServlet("/regions-handle-add")
-public class HandleAddRegionServlet extends HttpServlet {
+@WebServlet("/regions-handle-edit")
+public class HandleEditRegionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public HandleAddRegionServlet() {
+    public HandleEditRegionServlet() {
         super();    
     }
 
@@ -40,14 +40,11 @@ public class HandleAddRegionServlet extends HttpServlet {
 	
 		RegionBO regionBO = new RegionBO();
 		
-		if (regionBO.add(region) == true) {
-			request.setAttribute("success", "Thêm khu vực mới thành công");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/regions");
-			dispatcher.forward(request, response);
+		if (regionBO.edit(region) == true) {
+			response.sendRedirect(request.getContextPath() + "/regions");	
 		} else {
-			request.setAttribute("error", "Có lỗi trong quá trình tạo khu vực. Vui lòng thử lại!");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/regions-add");
-			dispatcher.forward(request, response);
+			request.setAttribute("region", region);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("region-edit.jsp");
 		}
 		
 		

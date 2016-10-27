@@ -149,4 +149,37 @@ public class RegionDAO extends AbstractDAO {
         return success;
     }
     
+    public boolean edit(Region region) {    
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;      
+        boolean success = false;
+        try {          
+            connection = DatabaseConnection.getConnection();
+            String sql = "UPDATE Region SET RegionName = ?, RegionArea = ?, RegionStatusID = ?, Description = ?"
+            		+ " WHERE RegionID = ?";
+            preparedStatement = connection.prepareStatement(sql);          
+            preparedStatement.setString(1, region.getRegionName());
+            preparedStatement.setDouble(2, region.getRegionArea());
+            preparedStatement.setInt(3, region.getRegionStatusID());
+            preparedStatement.setString(4, region.getDescription());
+            preparedStatement.setString(5, region.getRegionID());
+            
+            success = preparedStatement.executeUpdate() > 0;
+
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        } finally {
+            try {
+            
+                preparedStatement.close();
+                connection.close();
+            } catch (Exception exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
+        
+        return success;
+    }
+    
+    
 }

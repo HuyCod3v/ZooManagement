@@ -36,9 +36,13 @@ public class HandleDeleteRegionServlet extends HttpServlet {
 		RegionBO regionBO = new RegionBO();
 		
 		if (regionBO.delete(regionID) == true) {
-			response.sendRedirect(request.getContextPath() + "/regions");	
+			request.setAttribute("success", "Xóa khu vực thành công");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/regions");
+			dispatcher.forward(request, response);
 		} else {
-			response.sendRedirect(request.getContextPath() + "/regions-add");
+			request.setAttribute("error", "Có lỗi trong quá trình xóa khu vực. Vui lòng thử lại!");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/regions");
+			dispatcher.forward(request, response);
 		}
 		
 		

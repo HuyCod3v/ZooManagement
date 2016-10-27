@@ -22,7 +22,10 @@
             	<div class="col-lg-12">
             		<div class="panel panel-default">
             			<div class="panel-heading">
-            				Thêm khu vực          			
+            				<div>Thêm khu vực </div>
+            				<c:if test="${requestScope.error != null }">
+            					<div class="red-text"><c:out value="${requestScope.error }" /></div>
+            				</c:if>        			
             			</div>
             			
             			<div class="panel-body">
