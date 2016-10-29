@@ -54,7 +54,7 @@ public class CellDAO extends AbstractDAO {
         ResultSet resultSet = null;
         try {       
             connection = DatabaseConnection.getConnection();
-            String sql = "select * from cell where RegionID = ?";
+            String sql = "SELECT * from Cell where RegionID = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, RegionID);
             resultSet = preparedStatement.executeQuery();

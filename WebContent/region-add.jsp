@@ -53,11 +53,9 @@
             							
             							<div class="form-group">
                                             <label>Tình trạng khu vực</label>
-                                            <c:forEach var="status" items="${requestScope.statusList}">
-                                            	<div class="radio">                                        		
-	                                                <label>
-	                                                    <input type="radio" name="regionStatusID" value="${status.regionStatusID }">${status.regionStatusName}
-	                                                </label>
+                                            <c:forEach  var="status" items="${requestScope.statusList}">                                                     
+                                            	<div class="radio" class="form-control">                                        		
+	                                                <input type="radio" name="regionStatusID" checked value="${status.regionStatusID }">${status.regionStatusName}
 	                                            </div>
                                             
                                             </c:forEach>
@@ -65,7 +63,7 @@
                                         
                                         <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i>   Lưu</button>
                                         <button type="reset" class="btn btn-info"><i class="fa fa-eraser" aria-hidden="true"></i>   Xóa hết</button>
-                                        <button type="reset" class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i>   Hủy</button>
+                                        <a class="btn btn-danger" href='<c:url value="/regions"/>'"><i class="fa fa-ban" aria-hidden="true"></i>   Hủy</a>
             					</form>
             				
             				</div>

@@ -1,17 +1,16 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import bo.RegionBO;
-import bo.RegionStatusBO;
 import model.Region;
-import model.RegionStatus;
 
 @WebServlet("/regions-handle-edit")
 public class HandleEditRegionServlet extends HttpServlet {
@@ -41,10 +40,14 @@ public class HandleEditRegionServlet extends HttpServlet {
 		RegionBO regionBO = new RegionBO();
 		
 		if (regionBO.edit(region) == true) {
-			response.sendRedirect(request.getContextPath() + "/regions");	
+			request.setAttribute("success", "Cập nhật khu vực thành công");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/regions");
+			dispatcher.forward(request, response);			
 		} else {
 			request.setAttribute("region", region);
+			request.setAttribute("error", "Có lỗi trong quá trình cập nhật khu vực. Vui lòng thử lại!");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("region-edit.jsp");
+			dispatcher.forward(request, response);		
 		}
 		
 		
