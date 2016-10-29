@@ -1,6 +1,8 @@
 package model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
 	private String username;
 	private String password;
 	private int UserTypeID;
@@ -76,10 +78,10 @@ public class User {
 		super();
 		this.username = username;
 		this.password = password;
-		UserTypeID = userTypeID;
-		UserTypeName = userTypeName;
-		EmployeeID = employeeID;
-		EmployeeName = employeeName;
+		this.UserTypeID = userTypeID;
+		this.UserTypeName = userTypeName;
+		this.EmployeeID = employeeID;
+		this.EmployeeName = employeeName;
 		this.gender = gender;
 		this.birthday = birthday;
 		this.phone = phone;
@@ -87,7 +89,7 @@ public class User {
 	}
 	public User(String employeeName, int gender, String birthday, String phone, String address) {
 		super();
-		EmployeeName = employeeName;
+		this.EmployeeName = employeeName;
 		this.gender = gender;
 		this.birthday = birthday;
 		this.phone = phone;
@@ -98,5 +100,7 @@ public class User {
 		this.username = username;
 		this.password = password;
 	}
-	
+	public User(){
+		
+	}
 }
