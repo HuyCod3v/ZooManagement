@@ -18,7 +18,8 @@ import model.User;
 /**
  * Servlet Filter implementation class PermissionRole
  */
-@WebFilter( urlPatterns ={"/manager/*","/employee/*"})
+@WebFilter( urlPatterns ={"/manager/*","/employee/*"
+		,"/regions", "/regions-add", "/regions-edit", "/regions-handle-add", "/regions-handle-edit", "/regions-handle-delete"})
 public class PermissionRole implements Filter {
 
     /**
