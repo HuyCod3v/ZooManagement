@@ -217,6 +217,7 @@
 				<li><a href="/ZooManagement/employee"><i class="fa fa-user fa-fw"></i> Quản lý nhân viên<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="/ZooManagement/employee">Nhân Viên</a></li>
+						<li><a href="/ZooManagement/manager">Tài Khoản</a></li>
 					</ul>
 				</li>
 			</ul>
