@@ -1,17 +1,16 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import bo.CellBO;
 import bo.RegionBO;
-import bo.RegionStatusBO;
-import model.Region;
-import model.RegionStatus;
 
 @WebServlet("/regions-handle-delete")
 public class HandleDeleteRegionServlet extends HttpServlet {
@@ -34,6 +33,15 @@ public class HandleDeleteRegionServlet extends HttpServlet {
 		String regionID = request.getParameter("regionID");
 	
 		RegionBO regionBO = new RegionBO();
+		CellBO cellBO = new CellBO();
+		
+		int cellQuantity = cellBO.getByRegion(regionID).size();
+		if (cellQuantity > 0) {
+			request.setAttribute("error", "Không thể xóa khu vực còn các chuồng bên trong. Vui lòng xóa các chuồng của khu vực này trước!");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/regions");
+			dispatcher.forward(request, response);
+			return;
+		}
 		
 		if (regionBO.delete(regionID) == true) {
 			request.setAttribute("success", "Xóa khu vực thành công");
@@ -44,8 +52,7 @@ public class HandleDeleteRegionServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/regions");
 			dispatcher.forward(request, response);
 		}
-		
-		
+			
 	}
 
 }

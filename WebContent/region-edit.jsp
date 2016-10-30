@@ -22,7 +22,10 @@
             	<div class="col-lg-12">
             		<div class="panel panel-default">
             			<div class="panel-heading">
-            				Cập nhật khu vực     			
+            				<div>Cập nhật khu vực</div>    
+            				<c:if test="${requestScope.error != null }">
+            					<div class="red-text"><c:out value="${requestScope.error }" /></div>
+            				</c:if>   			
             			</div>
             			
             			<div class="panel-body">
@@ -56,7 +59,7 @@
                                             		<c:when test="${status.regionStatusID == region.regionStatusID}">
                                             			<div class="radio">                                        		
 			                                                <label>
-			                                                    <input type="radio" checked name="regionStatusID" value="${status.regionStatusID }">${status.regionStatusName}
+			                                                    <input type="radio" checked name="regionStatusID" required value="${status.regionStatusID }">${status.regionStatusName}
 			                                                </label>
 			                                            </div>
                                             		
@@ -81,7 +84,7 @@
                                         
                                         <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i>   Lưu</button>
                                         <button type="reset" class="btn btn-info"><i class="fa fa-eraser" aria-hidden="true"></i>   Xóa hết</button>
-                                        <button type="reset" class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i>   Hủy</button>
+                                        <a class="btn btn-danger" href='<c:url value="/regions"/>'"><i class="fa fa-ban" aria-hidden="true"></i>   Hủy</a>
             					</form>
             				
             				</div>
