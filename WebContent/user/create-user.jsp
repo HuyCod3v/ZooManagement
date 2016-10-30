@@ -31,7 +31,7 @@
 							</label>
 							<div class="">
 								<input type="text" class="form-control" id="username"
-									name="username" placeholder="Tên Nhân Viên" required value="${user.username}">
+									name="username" placeholder="Tên Nhân Viên" required value="${requestScope.user.username}">
 							</div>
 						</div>
 						<div class="form-group">
@@ -39,7 +39,7 @@
 								class="red-text">**</span>:
 							<select class="form-control" id="userTypeId" name="userTypeId">
 								<c:forEach var="type" items="${requestScope.listUserType}">
-							    	<option <c:if test="${type.userTypeId == user.userTypeID }">selected</c:if> value=${type.userTypeId }>${type.userTypeName}</option>
+							    	<option <c:if test="${type.userTypeId == requestScope.user.userTypeID }">selected</c:if> value=${type.userTypeId }>${type.userTypeName}</option>
 								</c:forEach>
 							 </select>
 						</div>

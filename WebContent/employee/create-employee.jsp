@@ -30,7 +30,7 @@
 								class="red-text">**</span>:
 							</label>
 							<div class="">
-								<input type="text" class="form-control" id="employeeId" value{}
+								<input type="text" class="form-control" id="employeeId"
 									name="employeeId" placeholder="Mã Nhân Viên" required value="${employee.employeeId}">
 							</div>
 						</div>
