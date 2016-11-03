@@ -10,6 +10,7 @@ public class Cell {
 	private int cellStatusID;
 	private CellStatus cellStatus;
 	private String description;
+	private Region region;
 	public String getCellID() {
 		return cellID;
 	}
@@ -63,6 +64,13 @@ public class Cell {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public Region getRegion() {
+		return region;
+	}
+	public void setRegion(Region region) {
+		this.region = region;
 	}
 	@Override
 	public String toString() {
