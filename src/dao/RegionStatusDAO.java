@@ -18,7 +18,7 @@ public class RegionStatusDAO extends AbstractDAO {
         
         try {        
             connection = DatabaseConnection.getConnection();
-            String SQL = "SELECT * FROM [RegionStatus]";
+            String SQL = "SELECT * FROM RegionStatus";
             preparedStatement = connection.prepareStatement(SQL);
             resultSet = preparedStatement.executeQuery();
             

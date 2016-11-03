@@ -434,3 +434,12 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+.text-center {
+	text-align: center;	
+}
+.red-text{
+	color: red;
+}
+.green-text{
+	color: green;
+}

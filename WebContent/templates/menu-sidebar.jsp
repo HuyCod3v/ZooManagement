@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <nav class="navbar navbar-default navbar-static-top" role="navigation"
@@ -10,7 +11,7 @@
 			<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span>
 			<span class="icon-bar"></span> <span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="index.html">QUẢN LÝ SỞ THÚ</a>
+		<a class="navbar-brand" href='<c:url value="employee"/>'>QUẢN LÝ SỞ THÚ</a>
 	</div>
 	<!-- /.navbar-header -->
 
@@ -193,12 +194,12 @@
 	<div class="navbar-default sidebar" role="navigation">
 		<div class="sidebar-nav navbar-collapse">
 			<ul class="nav" id="side-menu">			
-				<li><a href="index.html"><i class="fa fa-dashboard fa-fw"></i>
+				<li><a href="<c:url value='/notification'/>" ><i class="fa fa-dashboard fa-fw"></i>
 						Thông báo</a></li>
 				<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
 						Quản lý khu vực<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
-						<li><a href="flot.html">Khu vực</a></li>
+						<li><a href='<c:url value="/regions"/>'>Khu vực</a></li>
 						<li><a href="morris.html">Chuồng thú</a></li>
 					</ul> <!-- /.nav-second-level --></li>
 					
@@ -214,7 +215,12 @@
 						Quản lý công việc</a></li>
 				
 				
-				<li><a href="#"><i class="fa fa-files-o fa-fw"></i> Quản lý nhân viên<span class="fa arrow"></span></a></li>
+				<li><a href="/ZooManagement/employee"><i class="fa fa-user fa-fw"></i> Quản lý nhân viên<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href="/ZooManagement/employee">Nhân Viên</a></li>
+						<li><a href="/ZooManagement/manager">Tài Khoản</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 		<!-- /.sidebar-collapse -->

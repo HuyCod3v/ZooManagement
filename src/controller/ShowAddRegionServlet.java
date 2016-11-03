@@ -2,14 +2,16 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import bo.RegionBO;
-import model.Region;
+
+import bo.RegionStatusBO;
+import model.RegionStatus;
 
 @WebServlet("/regions-add")
 public class ShowAddRegionServlet extends HttpServlet {
@@ -24,10 +26,10 @@ public class ShowAddRegionServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		
-		RegionBO regionBO = new RegionBO();
-		List<Region> regions = regionBO.getAll();
+		RegionStatusBO regionStatusBO = new RegionStatusBO();
+		List<RegionStatus> statusList = regionStatusBO.getAll();
+		request.setAttribute("statusList", statusList);
 	
-		request.setAttribute("regions", regions);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("region-add.jsp");	
 		dispatcher.forward(request, response);
 		

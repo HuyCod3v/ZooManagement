@@ -50,4 +50,6 @@ public class CellBO {
 		
 	}
 	
+	public ArrayList<Cell> getByRegion(String regionID) {
+		return cellDAO.getByRegion(regionID);
 }

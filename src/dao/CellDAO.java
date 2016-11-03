@@ -247,5 +247,38 @@ public class CellDAO extends AbstractDAO {
 		return result;
 
 	}
-
+	public ArrayList<Cell> getByRegion(String RegionID) {
+        ArrayList<Cell> cellList = new ArrayList<>();
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        ResultSet resultSet = null;
+        try {       
+            connection = DatabaseConnection.getConnection();
+            String sql = "SELECT * from Cell where RegionID = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, RegionID);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                cellList.add(new Cell(resultSet.getString("CellID"),
+                        resultSet.getString("CellName"),
+                        resultSet.getString("RegionID"),
+                        resultSet.getString("SpeciesID"),
+                        resultSet.getInt("Capacity"),
+                        resultSet.getInt("CellStatusID"),
+                        resultSet.getString("Description")));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            try {
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+            } catch (Exception ex) {
+                System.out.println("In finally scope: " + ex.getMessage());
+            }
+        }
+        return cellList;
+    }
 }

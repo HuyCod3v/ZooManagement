@@ -22,54 +22,48 @@
             	<div class="col-lg-12">
             		<div class="panel panel-default">
             			<div class="panel-heading">
-            				Thêm khu vực          			
+            				<div>Thêm khu vực </div>
+            				<c:if test="${requestScope.error != null }">
+            					<div class="red-text"><c:out value="${requestScope.error }" /></div>
+            				</c:if>        			
             			</div>
             			
             			<div class="panel-body">
             				<div class="col-lg-9">
-            					<form role="form">
+            					<form role="form" id="addRegionForm" method="post" action='<c:url value="/regions-handle-add"/>'>
             							<div class="form-group">
-                                            <label>Mã khu vực</label>
-                                            <input class="form-control">                                      
+                                            <label for="regionID">Mã khu vực (*)</label>
+                                            <input id="regionID" class="form-control" name="regionID" maxlength="10" required>                                      
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label>Tên khu vực</label>
-                                            <input class="form-control">                                      
+                                            <label for="regionName">Tên khu vực (*)</label>
+                                            <input id="regionName" class="form-control" name="regionName" maxlength="30" required>                                      
                                         </div>	
                                         
                                         <div class="form-group">
-                                            <label>Diện tích</label>
-                                            <input class="form-control">                                      
+                                            <label for="regionArea">Diện tích (mét vuông)</label>
+                                            <input id="regionArea" class="form-control" name="regionArea" type="number" min="0" max="65535">                                      
                                         </div>	
                                         
                                         <div class="form-group">
-                                            <label>Mô tả</label>
-                                            <textarea class="form-control" rows="3"></textarea>
+                                            <label for="description">Mô tả</label>
+                                            <textarea id="description" class="form-control" rows="3" name="description" maxlength="1000"></textarea>
                                         </div>			
             							
             							<div class="form-group">
                                             <label>Tình trạng khu vực</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                                </label>
-                                            </div>
+                                            <c:forEach  var="status" items="${requestScope.statusList}">                                                     
+                                            	<div class="radio" class="form-control">                                        		
+	                                                <input type="radio" name="regionStatusID" checked value="${status.regionStatusID }">${status.regionStatusName}
+	                                            </div>
+                                            
+                                            </c:forEach>
                                         </div>
                                         
                                         <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i>   Lưu</button>
                                         <button type="reset" class="btn btn-info"><i class="fa fa-eraser" aria-hidden="true"></i>   Xóa hết</button>
-                                        <button type="reset" class="btn btn-danger"><i class="fa fa-ban" aria-hidden="true"></i>   Hủy</button>
+                                        <a class="btn btn-danger" href='<c:url value="/regions"/>'"><i class="fa fa-ban" aria-hidden="true"></i>   Hủy</a>
             					</form>
             				
             				</div>
@@ -86,6 +80,10 @@
 
 
 	<jsp:include page="/templates/footer.jsp" />
+	
+	<script>
+		$("#addRegionForm").validate();
+	</script>
 
 </body>
 </html>
