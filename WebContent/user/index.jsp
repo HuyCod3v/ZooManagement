@@ -57,14 +57,12 @@
 											<td>${user.username}</td>
 											<td>${user.userTypeName}</td>
 											<td>
-												<a class="btn btn-info btn-circle"
-													href='<c:url value="/manager/create-user"/>'>
-													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-												</a>
-												<a class="btn btn-info btn-circle"
-													href='<c:url value="/manager/delete-user?username=${user.username}"/>'>
-													<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-												</a>
+												<button type="button" id="delete-user-action"
+													class="btn btn-danger btn-circle"
+													data-user-id="${user.username}" data-toggle="modal"
+													data-target="#delete-user-modal">
+													<i class="fa fa-trash" aria-hidden="true"></i>
+												</button>
 											</td>
 										</tr>
 									</c:forEach>
@@ -76,6 +74,37 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal fade" id="delete-user-modal" role="dialog">
+	    <div class="modal-dialog">
+	      <!-- Modal content-->
+	      <div class="modal-content">    
+		      <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <div>Xác nhận</div>
+		        </div>   
+	        <div class="modal-body" style="padding:10px 10px;">
+	          <form role="form">
+	          	  <div>Bạn có muốn xóa tài khoản <label id="user-id"></label> không ?</div>                                         
+	          </form>
+	        </div>     
+	        <div class="modal-footer">
+	        	<form method="get" role="form" action='<c:url value="/manager/delete-user"/>'>
+	        		<input type="hidden" name="username" id="user-id-submit"/>
+	        		<button type="submit" class="btn btn-info btn-default pull-left"><span class="fa fa-check"></span> Có</button>
+	          		<button type="button" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="fa fa-ban"></span> Không</button>
+	        	</form>
+	        </div>
+	      </div>
+	    </div>
+  </div>
 	<jsp:include page="/templates/footer.jsp" />
+	<script type="text/javascript">
+		$(document).on("click", "#delete-user-action", function () {
+		     var userId = $(this).data('user-id');
+		     $(".modal-body #user-id").html(userId);
+		     $("#user-id-submit").val(userId);		
+		});
+	</script>
 </body>
 </html>

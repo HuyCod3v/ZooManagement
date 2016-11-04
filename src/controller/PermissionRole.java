@@ -18,8 +18,7 @@ import model.User;
 /**
  * Servlet Filter implementation class PermissionRole
  */
-@WebFilter( urlPatterns ={"/manager/*","/employee/*"
-		,"/regions", "/regions-add", "/regions-edit", "/regions-handle-add", "/regions-handle-edit", "/regions-handle-delete"})
+@WebFilter( urlPatterns ={"/manager/*"})
 public class PermissionRole implements Filter {
 
     /**
@@ -42,7 +41,7 @@ public class PermissionRole implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-		if(session.getAttribute("user") != null){
+		if(session.getAttribute("user") != null && ((User)session.getAttribute("user")).getUserTypeID() == 1){
 			chain.doFilter(request, response);
 		}else {
 			((HttpServletResponse) response).sendRedirect(req.getContextPath()+"/");
