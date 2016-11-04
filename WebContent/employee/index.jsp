@@ -52,7 +52,8 @@
 										<tr>
 											<td>${employee.employeeId}</td>
 											<td>${employee.employeeName}</td>
-											<td>${employee.gender}</td>
+											<c:if test="${employee.gender == 1 }"><td>Nam</td></c:if>
+											<c:if test="${employee.gender == 0 }"><td>Nữ</td></c:if>
 											<td>${employee.birthday}</td>
 											<td>${employee.phone}</td>
 											<td>${employee.address}</td>
@@ -61,10 +62,10 @@
 													href='<c:url value="/edit-employee?employeeId=${employee.employeeId}"/>'>
 														<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 												</a>
-												<button type="button" id="delete-region-action"
+												<button type="button" id="delete-employee-action"
 													class="btn btn-danger btn-circle"
-													data-region-id="${employee.employeeId}" data-toggle="modal"
-													data-target="#delete-region-modal">
+													data-employee-id="${employee.employeeId}" data-toggle="modal"
+													data-target="#delete-employee-modal">
 													<i class="fa fa-trash" aria-hidden="true"></i>
 												</button>
 											</td>
@@ -78,6 +79,38 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal fade" id="delete-employee-modal" role="dialog">
+	    <div class="modal-dialog">
+	      <!-- Modal content-->
+	      <div class="modal-content">    
+		      <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <div>Xác nhận</div>
+		        </div>   
+	        <div class="modal-body" style="padding:10px 10px;">
+	          <form role="form">
+	          	  <div>Bạn có muốn xóa nhân viên <label id="employee-id"></label> không ?</div>                                         
+	          </form>
+	        </div>     
+	        <div class="modal-footer">
+	        	<form method="get" role="form" action='<c:url value="/do-delete-employee"/>'>
+	        		<input type="hidden" name="employeeId" id="employee-id-submit"/>
+	        		<button type="submit" class="btn btn-info btn-default pull-left"><span class="fa fa-check"></span> Có</button>
+	          		<button type="button" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="fa fa-ban"></span> Không</button>
+	        	</form>
+	        </div>
+	      </div>
+	    </div>
+  </div>
 	<jsp:include page="/templates/footer.jsp" />
+	
+	<script type="text/javascript">
+		$(document).on("click", "#delete-employee-action", function () {
+		     var employeeId = $(this).data('employee-id');
+		     $(".modal-body #employee-id").html(employeeId);
+		     $("#employee-id-submit").val(employeeId);		
+		});
+	</script>
 </body>
 </html>

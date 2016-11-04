@@ -24,7 +24,7 @@ public class CellDAO extends AbstractDAO {
 		try {
 
 			connection = DatabaseConnection.getConnection();
-			String sql = "SELECT * FROM [Cell] c JOIN CellStatus cs ON c.CellStatusID = cs.CellStatusID"
+			String sql = "SELECT * FROM Cell c JOIN CellStatus cs ON c.CellStatusID = cs.CellStatusID"
 					+ " JOIN Region r ON c.RegionID LIKE r.RegionID "
 					+ " JOIN Species sp ON c.SpeciesID LIKE sp.SpeciesID ";
 			preparedStatement = connection.prepareStatement(sql);

@@ -21,4 +21,8 @@ public class EmployeeBO {
 	public boolean editEmployee(Employee employee) {
 		return new EmployeeDAO().editEmployee(employee);
 	}
+	
+	public boolean deleteEmployee(String id) {
+		return new EmployeeDAO().deleteEmployee(id);
+	}
 }

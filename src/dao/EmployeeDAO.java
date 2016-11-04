@@ -128,4 +128,25 @@ public class EmployeeDAO {
         }
         return true;
     }
+	
+	public boolean deleteEmployee(String id) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        try {           
+            connection = DatabaseConnection.getConnection();
+            String sql = "DELETE FROM employee where EmployeeID = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            return preparedStatement.executeUpdate() == 1 ? true : false;
+        } catch (Exception ex) {
+            return false;
+        } finally {
+            try {
+                preparedStatement.close();
+                connection.close();
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
 }
