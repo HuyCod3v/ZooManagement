@@ -45,7 +45,7 @@ public class ShowAddAnimal extends HttpServlet {
 		request.setAttribute("error", error);
 
 		request.setAttribute("cells", cellBO.getCellSpace());
-		request.setAttribute("species", new SpeciesBO().getAllSpecies());
+		request.setAttribute("species", new SpeciesBO().getAll());
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/animal-add.jsp");
 

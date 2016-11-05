@@ -60,7 +60,7 @@ public class EditAnimal extends HttpServlet {
 				request.setAttribute("errorUpdate",errorUpdate);
 			}
 			
-			request.setAttribute("species", speciesBO.getAllSpecies());
+			request.setAttribute("species", speciesBO.getAll());
 			request.setAttribute("cells", cellBO.getCellSpace());
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/animal-edit.jsp");
