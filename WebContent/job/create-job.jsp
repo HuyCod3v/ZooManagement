@@ -5,7 +5,7 @@
 <html>
 <head>
 <jsp:include page="/templates/header.jsp" />
-<title>Create Notification</title>
+<title>Create Employee</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -13,32 +13,43 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header">Tạo Mới Thông Báo</h3>
+					<h3 class="page-header">Tạo Mới Nhân Viên</h3>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
 					<c:if test="${requestScope.message != null}">
 						<div class="alert alert-danger">
 							${requestScope.message}
 						</div>
 					</c:if>
-					<form class="form-horizontal" action="<c:url value='/notification/do-create-notification'/>" method="post">
+					<form class="form-horizontal" action='<c:url value="/job/do-create-job" />' method="post">
 						<div class="form-group">
-							<label class="" for="title">Tiêu Đề<span
+							<label class="" for="jobId">Mã Công Việc<span
 								class="red-text">**</span>:
 							</label>
 							<div class="">
-								<input type="text" class="form-control" id="title"
-									name="title" placeholder="Nhập Tiêu Đề" required">
+								<input type="text" class="form-control" id="jobId"
+									name="jobId" placeholder="Mã Công Việc" required value="${job.jobId}">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="" for="content">Nội Dung<span
-								class="red-text">**</span>:</label>
+							<label class="" for="jobName">Tên Công Việc<span
+								class="red-text">**</span>:
+							</label>
 							<div class="">
-								<textarea class="form-control" name="content" rows="10" id="content"></textarea>
+								<input type="text" class="form-control" id="jobName"
+									name="jobName" placeholder="Tên Công Việc" required value="${job.jobName}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="" for="des">Mô Tả Công Việc<span
+								class="red-text">**</span>:
+							</label>
+							<div class="">
+								<input type="text" class="form-control" id="des"
+									name="des" placeholder="Mô Tả Sơ Lược"  value="${job.description}">
 							</div>
 						</div>
 						<div class="form-group">
@@ -49,7 +60,7 @@
 						</div>
 					</form>
 				</div>
-				<div class="col-md-2"></div>
+				<div class="col-md-3"></div>
 			</div>
 		</div>
 	</div>

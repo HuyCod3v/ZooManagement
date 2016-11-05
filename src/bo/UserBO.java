@@ -29,5 +29,7 @@ public class UserBO {
 	public User findUser(String username, String password){
 		return  new UserDAO().find(username, password);
 	}
-	
+	public boolean changePassword(User user,String pass){
+		return new UserDAO().changePassword(user, pass);
+	}
 }

@@ -39,7 +39,13 @@ public class HandleAddRegionServlet extends HttpServlet {
 	
 		RegionBO regionBO = new RegionBO();
 		
-		if (regionBO.add(region) == true) {
+		if (regionBO.find(regionID) != null) {
+			request.setAttribute("error", "Mã khu vực đã tồn tại. Vui lòng thử lại!");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/regions-add");
+			dispatcher.forward(request, response);
+		}
+		
+		else if (regionBO.add(region) == true) {
 			request.setAttribute("success", "Thêm khu vực mới thành công");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/regions");
 			dispatcher.forward(request, response);
