@@ -206,8 +206,7 @@
 					<li><a href="#"><i class="fa fa-wrench fa-fw"></i> Quản lý động vật<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="panels-wells.html">Động vật</a></li>
-						<li><a href="buttons.html">Loài</a></li>
-						<li><a href="notifications.html">Lớp</a></li>
+						<li><a href='<c:url value="/species"/>'>Loài</a></li>
 					</ul> <!-- /.nav-second-level --></li>
 				<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
 						Công việc của tôi</a></li>
