@@ -46,7 +46,7 @@ public class ShowAddCellServlet extends HttpServlet {
 		request.setAttribute("error", error);
 
 		request.setAttribute("regions", regionBO.getAll());
-		request.setAttribute("species", speciesBO.getAllSpecies());
+		request.setAttribute("species", speciesBO.getAll());
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/cell-add.jsp");
 
