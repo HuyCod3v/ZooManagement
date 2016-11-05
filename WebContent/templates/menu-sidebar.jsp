@@ -200,7 +200,7 @@
 						Quản lý khu vực<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href='<c:url value="/regions"/>'>Khu vực</a></li>
-						<li><a href="morris.html">Chuồng thú</a></li>
+						<li><a href="<c:url value="/cells"/>">Chuồng thú</a></li>
 					</ul> <!-- /.nav-second-level --></li>
 					
 					<li><a href="#"><i class="fa fa-wrench fa-fw"></i> Quản lý động vật<span class="fa arrow"></span></a>

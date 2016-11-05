@@ -17,7 +17,7 @@ public class NotificationDAO {
 		ResultSet resultSet = null;
 		try {
 			connection = DatabaseConnection.getConnection();
-			String sql = "SELECT * FROM notification";
+			String sql = "SELECT * FROM notification order by NotificationDate DESC";
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
