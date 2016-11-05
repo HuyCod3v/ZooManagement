@@ -277,5 +277,27 @@ public class UserDAO extends AbstractDAO {
         }
         return true;
     }
-	
+	public boolean changePassword(User user,String pass){
+		PreparedStatement pst = null;
+        Connection con = null;
+		String sql = "UPDATE User SET Password = ? WHERE Username = ?";
+		try{
+			con = DatabaseConnection.getConnection();
+			pst = con.prepareStatement(sql);
+			pst.setString(1, pass);
+			pst.setString(2, user.getUsername());
+			return pst.executeUpdate() == 1 ? true : false;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally {
+			try{
+				con.close();
+				pst.close();
+				
+			}catch(Exception e){
+				
+			}
+		}
+	}
 }
