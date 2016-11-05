@@ -5,7 +5,7 @@
 <html>
 <head>
 <jsp:include page="/templates/header.jsp" />
-<title>Create Notification</title>
+<title>Change Password</title>
 </head>
 <body>
 	<div id="wrapper">
@@ -13,32 +13,43 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header">Tạo Mới Thông Báo</h3>
+					<h3 class="page-header">Thay Đổi Mật Khẩu</h3>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
 					<c:if test="${requestScope.message != null}">
 						<div class="alert alert-danger">
 							${requestScope.message}
 						</div>
 					</c:if>
-					<form class="form-horizontal" action="<c:url value='/notification/do-create-notification'/>" method="post">
+					<form class="form-horizontal" action='<c:url value="/do-change-password" />' method="post">
 						<div class="form-group">
-							<label class="" for="title">Tiêu Đề<span
+							<label class="" for="password">Mật Khẩu Cũ:<span
 								class="red-text">**</span>:
 							</label>
 							<div class="">
-								<input type="text" class="form-control" id="title"
-									name="title" placeholder="Nhập Tiêu Đề" required">
+								<input type="password" class="form-control" id="password"
+									name="password" required  placeholder="Nhập mật khẩu cũ">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="" for="content">Nội Dung<span
-								class="red-text">**</span>:</label>
+							<label class="" for="password-new">Mật Khẩu Mới:<span
+								class="red-text">**</span>:
+							</label>
 							<div class="">
-								<textarea class="form-control" name="content" rows="10" id="content"></textarea>
+								<input type="password" class="form-control" id="password-new"
+									name="password-new" placeholder="Nhập mới" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="" for="password-re">Nhập Lại Mật Khẩu:<span
+								class="red-text">**</span>:
+							</label>
+							<div class="">
+								<input type="password" class="form-control" id="password-re"
+									name="password-re" placeholder="Nhập lại" required>
 							</div>
 						</div>
 						<div class="form-group">
@@ -49,7 +60,7 @@
 						</div>
 					</form>
 				</div>
-				<div class="col-md-2"></div>
+				<div class="col-md-3"></div>
 			</div>
 		</div>
 	</div>
