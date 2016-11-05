@@ -53,4 +53,8 @@ public class CellBO {
 	public ArrayList<Cell> getByRegion(String regionID) {
 		return mCellDAO.getByRegion(regionID);
 	}
+	
+	public ArrayList<Cell> getCellSpace(){
+		return mCellDAO.getAllSpace();
+	}
 }

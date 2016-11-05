@@ -40,9 +40,23 @@ public class Animal {
 		this.regionName = regionName;
 		this.regionID = regionID;
 	}
-
 	
 
+
+	public Animal(String animalID, String animalName, int gender, double height, double weight, String healthStatus,
+			String description, String cellID) {
+		super();
+		this.animalID = animalID;
+		this.animalName = animalName;
+		this.gender = gender;
+		this.height = height;
+		this.weight = weight;
+		this.healthStatus = healthStatus;
+		this.description = description;
+		this.cellID = cellID;
+	}
+	
+	
 
 	public Animal(String animalID, String animalName, String speciesID, int gender, double height, double weight,
 			String healthStatus, String description, String cellID) {
@@ -58,13 +72,11 @@ public class Animal {
 		this.cellID = cellID;
 	}
 
-
-
-
 	public String getRegionName() {
 		return regionName;
 	}
 
+	
 
 
 

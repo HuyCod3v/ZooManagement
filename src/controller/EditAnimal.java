@@ -9,23 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bo.AnimalBO;
 import bo.CellBO;
-import bo.CellStatusBO;
-import bo.RegionBO;
 import bo.SpeciesBO;
-import model.Cell;
+import model.Animal;
 
 /**
  * Servlet implementation class CellMainServlet
  */
-@WebServlet("/cell-edit")
-public class EditCellServlet extends HttpServlet {
+@WebServlet("/animal-edit")
+public class EditAnimal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public EditCellServlet() {
+	public EditAnimal() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,18 +39,20 @@ public class EditCellServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
+		
+		AnimalBO animalBO = new AnimalBO();
 
-		CellBO cellBO = new CellBO();
-		String cellID = request.getParameter("id");
+		
+		String animalID = request.getParameter("id");
 		String submit = request.getParameter("submit");
 		
-		Cell cell = cellBO.getCellByID(cellID);
+		Animal animal = animalBO.getAnimalById(animalID);
 		
 		if(submit==null){
-			request.setAttribute("cell", cell);
+			request.setAttribute("animal", animal);
 			
-			RegionBO regionBO = new RegionBO();
-			CellStatusBO cellStatusBO = new CellStatusBO();
+			SpeciesBO speciesBO = new SpeciesBO();
+			CellBO cellBO = new CellBO();
 			
 			String errorUpdate = request.getParameter("errorUpdate");
 			
@@ -59,28 +60,31 @@ public class EditCellServlet extends HttpServlet {
 				request.setAttribute("errorUpdate",errorUpdate);
 			}
 			
-			request.setAttribute("regions", regionBO.getAll());
-			request.setAttribute("status", cellStatusBO.getAll());
+			request.setAttribute("species", speciesBO.getAllSpecies());
+			request.setAttribute("cells", cellBO.getCellSpace());
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/cell-edit.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/animal-edit.jsp");
 			dispatcher.forward(request, response);
 			
 		}else{
 			
-			String cellName = request.getParameter("name-cell");
-			int capacity = Integer.parseInt(request.getParameter("capacity"));
+			String animalName = request.getParameter("name-animal");
+			int gender = Integer.parseInt(request.getParameter("gender-animal"));
+			double weight = Double.parseDouble(request.getParameter("weight"));
+			double height = Double.parseDouble(request.getParameter("height"));
+			String healthStatus = request.getParameter("health-status");
 			String description = request.getParameter("description");
-			String regionID = request.getParameter("region-select");
-			int cellStatusID = Integer.parseInt(request.getParameter("cell-status"));
-
-			Cell cellEdit = new Cell(cellID, cellName, regionID,"", capacity, cellStatusID, description);
+			String cellID = request.getParameter("cell-select");
+			String speciesID = request.getParameter("species-select");
+			
+			Animal animalUpdate = new Animal(animalID, animalName,speciesID, gender, height, weight, healthStatus, description, cellID);
 				
-				if (cellBO.updateCell(cellEdit)) {
+				if (animalBO.updateAnimal(animalUpdate)) {
 					System.out.println("Update successfully !");
-					response.sendRedirect(request.getContextPath() + "/cells?msgUpdate=1");
+					response.sendRedirect(request.getContextPath() + "/animals?msgUpdate=1");
 				} else {
 					System.out.println("Update failed !");
-					response.sendRedirect(request.getContextPath() + "/cell-edit?errorUpdate=1");
+					response.sendRedirect(request.getContextPath() + "/animal-edit?errorUpdate=1");
 				}
 			}
 		}

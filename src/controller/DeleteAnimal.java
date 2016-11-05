@@ -2,26 +2,25 @@ package controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bo.CellBO;
+import bo.AnimalBO;
 
 /**
  * Servlet implementation class CellMainServlet
  */
-@WebServlet("/cells")
-public class CellMainServlet extends HttpServlet {
+@WebServlet("/animal-del")
+public class DeleteAnimal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CellMainServlet() {
+    public DeleteAnimal() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,19 +34,21 @@ public class CellMainServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 		
-		CellBO cellBO = new CellBO();
-		request.setAttribute("cells", cellBO.getAllCells());
+		System.out.println("OK");
 		
-		String msgAdd = request.getParameter("msgAdd");
+		AnimalBO animalBO = new AnimalBO();
 		
-		String msgUpdate = request.getParameter("msgUpdate");
-		String msgDel = request.getParameter("msgDel");
-		request.setAttribute("msgAdd", msgAdd);
-		request.setAttribute("msgUpdate", msgUpdate);
-		request.setAttribute("msgDel", msgDel);
+		String animalID = request.getParameter("animalID");
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cell-main.jsp");
-		dispatcher.forward(request, response);
+		
+		
+		if(animalBO.deleteAnimal(animalID)){
+			System.out.println("Delete cell successfully !");
+			response.sendRedirect(request.getContextPath()+"/animals?msgDel=1");
+		}else{
+			System.out.println("Delete cell failed !");
+			response.sendRedirect(request.getContextPath()+"/animals");
+		}
 		
 	}
 

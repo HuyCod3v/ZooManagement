@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import model.Cell;
 import model.CellStatus;
 import model.Region;
-import model.Species;
 import utilities.DatabaseConnection;
 
 public class CellDAO extends AbstractDAO {
@@ -25,8 +24,7 @@ public class CellDAO extends AbstractDAO {
 
 			connection = DatabaseConnection.getConnection();
 			String sql = "SELECT * FROM Cell c JOIN CellStatus cs ON c.CellStatusID = cs.CellStatusID"
-					+ " JOIN Region r ON c.RegionID LIKE r.RegionID "
-					+ " JOIN Species sp ON c.SpeciesID LIKE sp.SpeciesID ";
+					+ " JOIN Region r ON c.RegionID LIKE r.RegionID ";
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -41,11 +39,53 @@ public class CellDAO extends AbstractDAO {
 						resultSet.getInt("regionStatusID"), resultSet.getLong("regionArea"),
 						resultSet.getString("description"));
 
-				Species species = new Species(resultSet.getString("speciesID"), resultSet.getString("speciesName"),
+				cell.setRegion(region);
+				cell.setCellStatus(cellStatus);
+
+				cellList.add(cell);
+
+			}
+		} catch (Exception ex) {
+			System.out.println("In catch scope: " + ex.getMessage());
+		} finally {
+			try {
+				resultSet.close();
+				preparedStatement.close();
+				connection.close();
+			} catch (Exception ex) {
+				System.out.println("In finally scope: " + ex.getMessage());
+			}
+		}
+		return cellList;
+	}
+	
+	//
+	public ArrayList<Cell> getAllSpace() {
+		ArrayList<Cell> cellList = new ArrayList<>();
+		PreparedStatement preparedStatement = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+
+		try {
+
+			connection = DatabaseConnection.getConnection();
+			String sql = "SELECT * FROM Cell c JOIN CellStatus cs ON c.CellStatusID = cs.CellStatusID"
+					+ " JOIN Region r ON c.RegionID LIKE r.RegionID where cs.CellStatusID = 0";
+			preparedStatement = connection.prepareStatement(sql);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Cell cell = new Cell(resultSet.getString("CellID"), resultSet.getString("CellName"),
+						resultSet.getString("RegionID"), resultSet.getString("SpeciesID"), resultSet.getInt("Capacity"),
+						resultSet.getInt("CellStatusID"), resultSet.getString("Description"));
+
+				CellStatus cellStatus = new CellStatus(resultSet.getInt("CellStatusID"),
+						resultSet.getString("CellStatusName"));
+
+				Region region = new Region(resultSet.getString("regionID"), resultSet.getString("regionName"),
+						resultSet.getInt("regionStatusID"), resultSet.getLong("regionArea"),
 						resultSet.getString("description"));
 
 				cell.setRegion(region);
-				cell.setSpecies(species);
 				cell.setCellStatus(cellStatus);
 
 				cellList.add(cell);
@@ -104,15 +144,14 @@ public class CellDAO extends AbstractDAO {
 
 		try {
 			connection = DatabaseConnection.getConnection();
-			String sql = "INSERT INTO Cell VALUES(?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO Cell(CellID,CellName,RegionID,Capacity,CellStatusID,Description) VALUES(?,?,?,?,?,?)";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, cell.getCellID());
 			preparedStatement.setString(2, cell.getCellName());
 			preparedStatement.setString(3, cell.getRegionID());
-			preparedStatement.setString(4, cell.getSpeciesID());
-			preparedStatement.setInt(5, cell.getCapacity());
-			preparedStatement.setInt(6, cell.getCellStatusID());
-			preparedStatement.setString(7, cell.getDescription());
+			preparedStatement.setInt(4, cell.getCapacity());
+			preparedStatement.setInt(5, cell.getCellStatusID());
+			preparedStatement.setString(6, cell.getDescription());
 			preparedStatement.executeUpdate();
 			result = true;
 		} catch (SQLException ex) {
@@ -194,7 +233,7 @@ public class CellDAO extends AbstractDAO {
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				cell = new Cell(resultSet.getString("CellID"), resultSet.getString("CellName"),
-						resultSet.getString("RegionID"), resultSet.getString("SpeciesID"), resultSet.getInt("Capacity"),
+						resultSet.getString("RegionID"), resultSet.getInt("Capacity"),
 						resultSet.getInt("CellStatusID"), resultSet.getString("Description"));
 			}
 		} catch (SQLException ex) {
@@ -221,16 +260,15 @@ public class CellDAO extends AbstractDAO {
 
 		try {
 			connection = DatabaseConnection.getConnection();
-			String sql = "UPDATE Cell SET CellName = ?, RegionID = ?, SpeciesID = ?, Capacity = ?, "
+			String sql = "UPDATE Cell SET CellName = ?, RegionID = ?, Capacity = ?, "
 					+ "CellStatusID = ?, Description = ? WHERE CellID = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1,cell.getCellName() );
 			preparedStatement.setString(2,cell.getRegionID());
-			preparedStatement.setString(3,cell.getSpeciesID() );
-			preparedStatement.setInt(4,cell.getCapacity() );
-			preparedStatement.setInt(5,cell.getCellStatusID());
-			preparedStatement.setString(6,cell.getDescription() );
-			preparedStatement.setString(7,cell.getCellID() );
+			preparedStatement.setInt(3,cell.getCapacity() );
+			preparedStatement.setInt(4,cell.getCellStatusID());
+			preparedStatement.setString(5,cell.getDescription() );
+			preparedStatement.setString(6,cell.getCellID() );
 			preparedStatement.executeUpdate();
 			result = true;
 		} catch (SQLException ex) {

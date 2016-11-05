@@ -65,23 +65,6 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="exampleSelect2" class="">Loài</label> <select
-											class="form-control" id="species-select"
-											name="species-select">
-											<c:forEach var="species" items="${requestScope.species}">
-												<c:choose>
-													<c:when
-														test="${requestScope.cell.speciesID == species.speciesID}">
-														<option value="${species.speciesID}" selected="selected">${species.speciesName}</option>
-													</c:when>
-													<c:otherwise>
-														<option value="${species.speciesID}">${species.speciesName}</option>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-										</select>
-									</div>
-									<div class="form-group">
 										<label>Số lượng tối đa</label> <input class="form-control"
 											name="capacity" id="capacity" type="number"
 											value="${requestScope.cell.capacity}" required="required">

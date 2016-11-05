@@ -19,7 +19,7 @@ public class CellStatusDAO extends AbstractDAO {
         
         try {        
             connection = DatabaseConnection.getConnection();
-            String SQL = "SELECT * FROM [CellStatus]";
+            String SQL = "SELECT * FROM CellStatus";
             preparedStatement = connection.prepareStatement(SQL);
             resultSet = preparedStatement.executeQuery();
             

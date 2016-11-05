@@ -106,6 +106,22 @@ public class Cell {
 		this.cellStatus = cellStatus;
 		this.description = description;
 	}
+	public Cell(String cellID, String cellName, String regionID, int capacity, int cellStatusID, String description) {
+		super();
+		this.cellID = cellID;
+		this.cellName = cellName;
+		this.regionID = regionID;
+		this.capacity = capacity;
+		this.cellStatusID = cellStatusID;
+		this.description = description;
+	}
+	public Cell(String cellID, String cellName) {
+		super();
+		this.cellID = cellID;
+		this.cellName = cellName;
+	}
+	
+	
 	
 	
 	

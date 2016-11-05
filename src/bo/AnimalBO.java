@@ -1,10 +1,9 @@
 package bo;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import model.Animal;
 import dao.AnimalDAO;
+import model.Animal;
 
 public class AnimalBO {
 	
@@ -18,7 +17,7 @@ public class AnimalBO {
 		return animalDAO.edit(updatedAnimal);
 	}
 	
-	public List<Animal> getAllAnimals() {
+	public ArrayList<Animal> getAllAnimals() {
 		AnimalDAO animalDAO = new AnimalDAO();
 		return animalDAO.getAll();
 	}
@@ -50,5 +49,17 @@ public class AnimalBO {
 	public ArrayList<Animal> searchAnimalBySpecies(String speciesId) {
 		return new AnimalDAO().getBySpecies(speciesId);
 	}
+
+	public boolean checkExistAnimal(String animalID) {
+		
+		return new AnimalDAO().checkExistAnimal(animalID);
+	}
+
+	public boolean addAnimal(Animal animal) {
+		
+		return new AnimalDAO().add(animal);
+	}
+	
+	
 	 
 }

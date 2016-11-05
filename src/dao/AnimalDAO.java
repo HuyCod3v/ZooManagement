@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
-import java.util.List;
 
 import model.Animal;
+import model.Cell;
 import model.Species;
 import utilities.DatabaseConnection;
 
@@ -62,7 +62,8 @@ public class AnimalDAO extends AbstractDAO {
             preparedStatement.setString(7, animal.getDescription());
             preparedStatement.setString(8, animal.getCellID());
             preparedStatement.setString(9, animal.getAnimalID());
-            success = (preparedStatement.executeUpdate() == 1);
+            preparedStatement.executeUpdate();
+            success = true;
         } catch (Exception exception) {
         	exception.printStackTrace();
         } finally {
@@ -81,32 +82,34 @@ public class AnimalDAO extends AbstractDAO {
         return success;
     }
 
-    public  List<Animal> getAll() {
+    public  ArrayList<Animal> getAll() {
         PreparedStatement preparedStatement = null;
         Connection connection = null;
         ResultSet resultSet = null;
-        List<Animal> animals = new ArrayList<Animal>();
+        ArrayList<Animal> animals = new ArrayList<Animal>();
         
         try {
         	connection = DatabaseConnection.getConnection(); 
-            String SQL = "SELECT * FROM animal an LEFT JOIN cell cl ON an.CellID = cl.CellID LEFT JOIN region rg ON cl.RegionID = rg.RegionID LEFT JOIN species sc ON an.SpeciesID = sc.SpeciesID";
+            String SQL = "SELECT * FROM animal as an JOIN cell as cl ON an.CellID = cl.CellID JOIN Species as sp ON an.SpeciesID = sp.SpeciesID";
             preparedStatement = connection.prepareStatement(SQL);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Animal animal = new Animal(resultSet.getString("AnimalID"),
                         resultSet.getString("AnimalName"),
-                        resultSet.getString("SpeciesID"),
                         resultSet.getInt("Gender"),
                         resultSet.getDouble("Height"),
                         resultSet.getDouble("Weight"),
                         resultSet.getString("HealthStatus"),
                         resultSet.getString("Description"),
-                        resultSet.getString("CellID"),
-                        resultSet.getString("RegionName"),
-                        resultSet.getString("RegionID"));
+                        resultSet.getString("CellName"));
+                
+                Cell cell = new Cell(resultSet.getString("CellID"), resultSet.getString("CellName"));
+                
                 Species species = new Species(resultSet.getString("SpeciesID"),
                         resultSet.getString("SpeciesName"),
                         resultSet.getString("Description"));
+                
+                animal.setCell(cell);
                 animal.setSpecies(species);
                 animals.add(animal);
             }
@@ -131,6 +134,7 @@ public class AnimalDAO extends AbstractDAO {
 
         return animals;
     }
+    
 
     public Animal find(String id) {
         Animal animal = null;
@@ -201,7 +205,7 @@ public class AnimalDAO extends AbstractDAO {
                         resultSet.getString("CellID"),
                         resultSet.getString("RegionName"),
                         resultSet.getString("RegionID"));
-                Species species = new Species(resultSet.getString("SpeciesID"),
+                		Species species = new Species(resultSet.getString("SpeciesID"),
                         resultSet.getString("SpeciesName"),
                         resultSet.getString("Description"));
                 animal.setSpecies(species);
@@ -320,9 +324,9 @@ public class AnimalDAO extends AbstractDAO {
         Connection connection = null;
         try {           
             connection = DatabaseConnection.getConnection();
-            String sql = "INSERT INTO animal (AnimalID, AnimalName, SpeciesID, Gender, "
+            String sql = "INSERT INTO animal (AnimalID, AnimalName,SpeciesID, Gender, "
                                            + "Weight, Height, HealthStatus, Description, CellID) "
-                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
             preparedStatement = connection.prepareStatement(sql);
             
             preparedStatement.setString(1, newAnimal.getAnimalID());
@@ -349,7 +353,8 @@ public class AnimalDAO extends AbstractDAO {
 
             preparedStatement.setString(9, newAnimal.getCellID());
 
-            ok = (preparedStatement.executeUpdate() == 1);
+            preparedStatement.executeUpdate();
+            ok = true;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         } finally {
@@ -386,7 +391,7 @@ public class AnimalDAO extends AbstractDAO {
                         resultSet.getString("CellID"),
                         resultSet.getString("RegionName"),
                         resultSet.getString("RegionID"));
-                Species species = new Species(resultSet.getString("SpeciesID"),
+                		Species species = new Species(resultSet.getString("SpeciesID"),
                         resultSet.getString("SpeciesName"),
                         resultSet.getString("Description"));
                 animal.setSpecies(species);
@@ -407,5 +412,38 @@ public class AnimalDAO extends AbstractDAO {
 
         return animalList;
     }
+
+	public boolean checkExistAnimal(String animalID) {
+		
+		boolean check = false;
+		Connection connection= null;
+		PreparedStatement preparedStatement=null;
+		ResultSet resultSet = null;
+		
+		String sql = "SELECT * FROM animal where AnimalID = ?";
+		
+		try{
+			connection = DatabaseConnection.getConnection();
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, animalID);
+			resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()){
+				check = true;
+			}
+			
+		}catch(Exception e){
+			
+		} finally {
+            try {
+                resultSet.close();
+                preparedStatement.close();
+                connection.close();
+            } catch (Exception ex) {
+
+            }
+		}
+		
+		return check;
+	}
 
 }

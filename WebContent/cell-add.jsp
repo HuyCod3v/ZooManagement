@@ -53,15 +53,6 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="exampleSelect2" class="">Loài</label> <select
-											class="form-control" id="species-select"
-											name="species-select">
-											<c:forEach var="species" items="${requestScope.species}">
-												<option value="${species.speciesID}">${species.speciesName}</option>
-											</c:forEach>
-										</select>
-									</div>
-									<div class="form-group">
 										<label>Số lượng tối đa</label> <input class="form-control"
 											name="capacity" id="capacity" type="number" value="${requestScope.cell.capacity}"
 											required="required">
