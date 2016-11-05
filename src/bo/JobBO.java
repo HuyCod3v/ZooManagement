@@ -16,4 +16,7 @@ public class JobBO {
 	public boolean creatJob(Job job) {
 		return new JobDAO().creatJob(job);
 	}
+	public boolean updateJob(Job job) {
+		return new JobDAO().updateJob(job);
+	}
 }

@@ -90,4 +90,27 @@ public class JobDAO {
 		}
 		return job;
 	}
+	
+	public boolean updateJob(Job job) {
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        try {           
+            connection = DatabaseConnection.getConnection();
+            String sql = "UPDATE Job SET JobDescription = ?, JobName = ? where JobID = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, job.getDescription());
+            preparedStatement.setString(2, job.getJobName());
+            preparedStatement.setString(3, job.getJobId());
+            return preparedStatement.executeUpdate()== 1 ? true : false;
+        } catch (Exception ex) {
+            return false;
+        } finally {
+            try {
+                preparedStatement.close();
+                connection.close();
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
 }
