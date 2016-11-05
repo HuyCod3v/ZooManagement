@@ -52,8 +52,11 @@
 					</ul> <!-- /.nav-second-level --></li>
 				<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
 						Công việc của tôi</a></li>
-				<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
-						Quản lý công việc</a></li>
+				<li><a href="/ZooManagement/employee"><i class="fa fa-user fa-fw"></i> Quản lý công việc<span class="fa arrow"></span></a>
+					<ul class="nav nav-second-level">
+						<li><a href='<c:url value="/job/"/>'>Công Việc</a></li>
+					</ul>
+				</li>
 				
 				
 				<li><a href="/ZooManagement/employee"><i class="fa fa-user fa-fw"></i> Quản lý nhân viên<span class="fa arrow"></span></a>
