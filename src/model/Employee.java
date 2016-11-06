@@ -9,7 +9,9 @@ public class Employee implements Serializable {
 	private String birthday;
 	private String phone;
 	private String address;
-	
+	public Employee(){
+		
+	}
 	public Employee(String employeeId, String employeeName, int gender, String birthday, String phone, String address) {
 		this.employeeId = employeeId;
 		this.employeeName = employeeName;
