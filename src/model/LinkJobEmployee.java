@@ -1,11 +1,17 @@
 package model;
 
 public class LinkJobEmployee {
+	private int id;
 	private Job job;
 	private Employee employee;
 	private String description;
 	private String startTime;
 	private String endTime;
+	
+	public LinkJobEmployee() {
+		this.job = new Job();
+		this.employee = new Employee();
+	}
 	public Job getJob() {
 		return job;
 	}
@@ -35,6 +41,12 @@ public class LinkJobEmployee {
 	}
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	
