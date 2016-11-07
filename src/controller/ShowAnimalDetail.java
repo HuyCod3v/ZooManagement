@@ -48,7 +48,7 @@ public class ShowAnimalDetail extends HttpServlet {
 		CellBO cellBO = new CellBO();
 		
 		request.setAttribute("animal", animal);
-		request.setAttribute("species", speciesBO.getAllSpecies());
+		request.setAttribute("species", speciesBO.getAll());
 		request.setAttribute("cells", cellBO.getCellSpace());
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/animal-view.jsp");

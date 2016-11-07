@@ -68,6 +68,7 @@
 										<th>Chiều cao</th>
 										<th>Tình trạng sức khỏe</th>
 										<th>Tên chuồng</th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
