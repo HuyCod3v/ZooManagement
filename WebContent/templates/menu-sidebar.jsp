@@ -55,6 +55,7 @@
 				<li><a href="/ZooManagement/employee"><i class="fa fa-user fa-fw"></i> Quản lý công việc<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href='<c:url value="/job/"/>'>Công Việc</a></li>
+						<li><a href='<c:url value="/link-job/"/>'>Phân Việc</a></li>
 					</ul>
 				</li>
 				
@@ -62,7 +63,7 @@
 				<li><a href="/ZooManagement/employee"><i class="fa fa-user fa-fw"></i> Quản lý nhân viên<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href="<c:url value='/employee'/>">Nhân Viên</a></li>
-						<li><a href="<c:url value='manager'/>">Tài Khoản</a></li>
+						<li><a href="<c:url value='/manager'/>">Tài Khoản</a></li>
 					</ul>
 				</li>
 			</ul>
