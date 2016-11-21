@@ -37,7 +37,7 @@ public class DoDeleteEmployee extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/employee");
 			System.out.println("DELETE");
 		}else{
-			request.setAttribute("error","Đã xảy ra lỗi khi xóa nhân viên "+id);
+			request.setAttribute("error","Xảy ra lỗi khi xóa nhân viên "+id);
 			request.getRequestDispatcher("/employee").forward(request, response);
 		}
 	}
