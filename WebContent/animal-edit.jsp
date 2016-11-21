@@ -34,17 +34,18 @@
 						<div class="panel-body">
 							<div class="col-lg-9">
 								<form
+									id ="editAnimalForm"
 									action="${pageContext.request.contextPath}/animal-edit?id=${requestScope.animal.animalID}"
 									method="post">
 									<div class="form-group">
-										<label>Mã Thú</label> <input class="form-control"
+										<label>Mã động vật</label> <input class="form-control"
 											name="id-animal" id="id-animal"
 											value="${requestScope.animal.animalID}" disabled="disabled"
 											required="required">
 									</div>
 
 									<div class="form-group">
-										<label>Tên Thú</label> <input class="form-control"
+										<label>Tên động vật</label> <input class="form-control"
 											name="name-animal" id="name-animal"
 											value="${requestScope.animal.animalName}" required="required">
 									</div>
@@ -94,14 +95,14 @@
 											</c:otherwise>
 										</c:choose>
 										</div>
-									<div class="form-group">
-										<label>Cân nặng</label> <input class="form-control"
-											name="weight" id="weight" type="number"
+									<div class="weight">
+										<label>Cân nặng</label> <input class="form-control" type="number" min="0" max="5000"
+											name="weight" id="weight" type="number" id="weight"
 											value="${requestScope.animal.weight}" required="required">
 									</div>
-									<div class="form-group">
-										<label>Chiều cao</label> <input class="form-control"
-											name="height" id="height" type="number"
+									<div class="height">
+										<label>Chiều cao</label> <input class="form-control" type="number" min="0" max="100"
+											name="height" id="height" type="number" id="height"
 											value="${requestScope.animal.height}" required="required">
 									</div>
 									<div class="form-group">
@@ -130,10 +131,10 @@
 									<div class="form-group">
 										<label>Mô tả</label>
 										<textarea class="form-control" name="description" rows="4"
-											id="description" required="required">${requestScope.animal.description}</textarea>
+											id="description">${requestScope.animal.description}</textarea>
 									</div>
 									<button type="submit" class="btn btn-success" name="submit">
-										<i class="fa fa-floppy-o" aria-hidden="true"></i> Lưu
+										<i class="fa fa-floppy-o" aria-hidden="true"></i> Cập nhật
 									</button>
 									<button type="reset" class="btn btn-info">
 										<i class="fa fa-eraser" aria-hidden="true"></i> Xóa hết
@@ -154,9 +155,9 @@
 
 		</div>
 	</div>
-
-
 	<jsp:include page="/templates/footer.jsp" />
-
+	<script>
+		$("#editAnimalForm").validate();
+	</script>
 </body>
 </html>
