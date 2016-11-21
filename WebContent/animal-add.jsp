@@ -33,16 +33,16 @@
 
 						<div class="panel-body">
 							<div class="col-lg-9">
-								<form action="${pageContext.request.contextPath}/animal-add"
+								<form id="addAnimalForm" action="${pageContext.request.contextPath}/animal-add"
 									method="post">
 									<div class="form-group">
-										<label>Mã Thú</label> <input class="form-control"
+										<label for="id-animal">Mã động vật</label> <input class="form-control"
 											name="id-animal" id="id-animal"
-											value="${requestScope.animal.animalID}" required="required">
+											value="${requestScope.animal.animalID}" required>
 									</div>
 
 									<div class="form-group">
-										<label>Tên Thú</label> <input class="form-control"
+										<label>Tên động vật</label> <input class="form-control"
 											name="name-animal" id="name-animal"
 											value="${requestScope.animal.animalName}" required="required">
 									</div>
@@ -68,14 +68,14 @@
 											</label>
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="weight">
 										<label>Cân nặng</label> <input class="form-control"
-											name="weight" id="weight" type="number"
+											name="weight" id="weight" type="number" min="0" max="5000" id="weight"
 											value="${requestScope.animal.weight}" required="required">
 									</div>
-									<div class="form-group">
-										<label>Chiều cao</label> <input class="form-control"
-											name="height" id="height" type="number"
+									<div class="height">
+										<label>Chiều cao</label> <input class="form-control" id =""
+											name="height" id="height" type="number"  min="0" max="100"
 											value="${requestScope.animal.height}" required="required">
 									</div>
 									<div class="form-group">
@@ -119,9 +119,9 @@
 
 		</div>
 	</div>
-
-
 	<jsp:include page="/templates/footer.jsp" />
-
+	<script>
+		$("#addAnimalForm").validate();
+	</script>
 </body>
 </html>

@@ -33,15 +33,15 @@
 
 						<div class="panel-body">
 							<div class="col-lg-9">
-								<form action="${pageContext.request.contextPath}/cell-add"
+								<form id ="addCellForm" action="${pageContext.request.contextPath}/cell-add"
 									method="post">
-									<div class="form-group">
-										<label>Mã chuồng</label> <input class="form-control"
+									<div class="id-cell">
+										<label>Mã chuồng</label> <input class="form-control" id="id-cell"
 											name="id-cell" id="id-cell" value="${requestScope.cell.cellID}" required="required">
 									</div>
 
-									<div class="form-group">
-										<label>Tên Chuồng</label> <input class="form-control"
+									<div class="name-cell">
+										<label>Tên Chuồng</label> <input class="form-control" id="name-cell"
 											name="name-cell" id="name-cell" value="${requestScope.cell.cellName}" required="required">
 									</div>
 									<div class="form-group">
@@ -52,8 +52,8 @@
 											</c:forEach>
 										</select>
 									</div>
-									<div class="form-group">
-										<label>Số lượng tối đa</label> <input class="form-control"
+									<div class="capacity">
+										<label>Số lượng tối đa</label> <input class="form-control" min="0" max="100"
 											name="capacity" id="capacity" type="number" value="${requestScope.cell.capacity}"
 											required="required">
 									</div>
@@ -98,9 +98,9 @@
 
 		</div>
 	</div>
-
-
 	<jsp:include page="/templates/footer.jsp" />
-
+	<script type="text/javascript">
+		$("#addCellForm").validate();
+	</script>
 </body>
 </html>

@@ -35,7 +35,7 @@ public class DeleteNotification extends HttpServlet {
 				&& notiBO.deleteNotification(request.getParameter("notiId"))){
 			response.sendRedirect(request.getContextPath()+"/notification");
 		}else{
-			request.setAttribute("message","Đã xảy ra lỗi khi xóa 1 thông báo");
+			request.setAttribute("message","Xảy ra lỗi khi xóa 1 thông báo");
 			request.getRequestDispatcher("/notification").forward(request, response);
 		}
 		

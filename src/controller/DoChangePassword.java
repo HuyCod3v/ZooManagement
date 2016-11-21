@@ -37,7 +37,7 @@ public class DoChangePassword extends HttpServlet {
 		
 		UserBO userBO = new UserBO();
 		if(password.isEmpty() || passwordNew.isEmpty() || passwordRe.isEmpty()){
-			request.setAttribute("message","Nhập mật khẩu đầy đủ");
+			request.setAttribute("message","Nhập Mật Khẩu Đầy đủ");
 			request.getRequestDispatcher("/user/settings.jsp").forward(request, response);
 		}else if(!passwordNew.equals(passwordRe)){
 			request.setAttribute("message","Mật khẩu không trùng nhau");
@@ -50,7 +50,7 @@ public class DoChangePassword extends HttpServlet {
 			if(userBO.changePassword(user, passwordNew)){
 				response.sendRedirect(request.getContextPath()+"/employee");
 			}else{
-				request.setAttribute("message","Xảy ra lỗi khi cập nhật password");
+				request.setAttribute("message","Xảy ra lỗi khi cập nhật mật khẩu");
 				request.getRequestDispatcher("/user/settings.jsp").forward(request, response);
 			}
 		}

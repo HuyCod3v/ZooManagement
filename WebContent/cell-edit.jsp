@@ -34,8 +34,9 @@
 						<div class="panel-body">
 							<div class="col-lg-9">
 								<form
+									id = "editCellForm"
 									action="${pageContext.request.contextPath}/cell-edit?id=${requestScope.cell.cellID}"
-									method="post" id="form-edit-cell">
+									method="post" >
 									<div class="form-group">
 										<label>Mã chuồng</label> <input class="form-control"
 											name="id-cell" id="id-cell" type="text"
@@ -43,9 +44,9 @@
 											required="required">
 									</div>
 
-									<div class="form-group">
+									<div class="name-cell">
 										<label>Tên Chuồng</label> <input class="form-control"
-											name="name-cell" id="name-cell" type="text"
+											name="name-cell" id="name-cell" type="text" id="name-cell"
 											value="${requestScope.cell.cellName}" required="required">
 									</div>
 									<div class="form-group">
@@ -64,9 +65,9 @@
 											</c:forEach>
 										</select>
 									</div>
-									<div class="form-group">
-										<label>Số lượng tối đa</label> <input class="form-control"
-											name="capacity" id="capacity" type="number"
+									<div class="capacity">
+										<label>Số lượng tối đa</label> <input class="form-control" 
+											name="capacity" id="capacity" type="number" min="0" max="100" id="capacity"
 											value="${requestScope.cell.capacity}" required="required">
 									</div>
 
@@ -126,6 +127,10 @@
 	function resetForm() {
 		$('#form-edit-cell')[0].reset();
 	}
+	</script>
+	
+	<script>
+		$("#editCellForm").validate();
 	</script>
 </body>
 </html>

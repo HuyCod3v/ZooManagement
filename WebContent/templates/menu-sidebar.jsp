@@ -50,8 +50,6 @@
 						<li><a href='<c:url value="/animals"/>'>Động vật</a></li>
 						<li><a href='<c:url value="/species"/>'>Loài</a></li>
 					</ul> <!-- /.nav-second-level --></li>
-				<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
-						Công việc của tôi</a></li>
 				<li><a href="/ZooManagement/employee"><i class="fa fa-user fa-fw"></i> Quản lý công việc<span class="fa arrow"></span></a>
 					<ul class="nav nav-second-level">
 						<li><a href='<c:url value="/job/"/>'>Công Việc</a></li>
