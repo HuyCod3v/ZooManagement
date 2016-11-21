@@ -55,9 +55,9 @@
 											<td>${link.startTime}</td>
 											<td>${link.endTime}</td>
 											<td>
-												<a class="btn btn-info btn-circle"
+												<a class="btn btn-danger btn-circle"
 													href='<c:url value="/link-job/delete?linkId=${link.id}"/>'>
-														<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+														<i class="fa fa-trash" aria-hidden="true"></i>
 												</a>
 											</td>
 										</tr>
