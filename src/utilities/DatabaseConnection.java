@@ -8,7 +8,7 @@ public class DatabaseConnection {
 	
 	private static Connection getMySQLConnection(){
 		Connection connection = null;
-		String URL = "jdbc:mysql://" + Configuration.MYSQL_HOST + Configuration.MYSQL_DATABASE + "?useUnicode=true&characterEncoding=UTF8";
+		String URL = "jdbc:mysql://" + Configuration.MYSQL_HOST + Configuration.MYSQL_DATABASE + "?useUnicode=true&characterEncoding=UTF8&useSSL=false";
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

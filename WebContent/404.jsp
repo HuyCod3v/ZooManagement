@@ -1,12 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>404</title>
+<title>404 Not Found</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet"
+	href="<c:url value="/resources/css/style.css"/>">
 </head>
 <body>
-<h1>ĐM. CODE MÀ ĐỂ NOT FOUND . NGU NHƯ CON HEO :))</h1>
+<div class="wrap">
+	<h1>Zoo Management</h1>
+	<div class="banner">
+		<img src="<c:url value="/resources/images/banner_404.png"/>" alt="" />
+	</div>
+	<div class="page">
+		<h2>Dude, we can't find that page!</h2>
+	</div>
+	<div class="footer">
+	
+	</div>
+</div>
 </body>
 </html>

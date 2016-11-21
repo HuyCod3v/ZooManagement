@@ -10,6 +10,6 @@ public class Configuration {
 	public static final String MYSQL_HOST = "localhost:3306/";
 	public static final String MYSQL_DATABASE = "ZooManagement";
 	public static final String MYSQL_USER = "root";
-	public static final String MYSQL_PASSWORD = "";
+	public static final String MYSQL_PASSWORD = "root";
 	
 }
