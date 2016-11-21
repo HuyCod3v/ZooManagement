@@ -48,13 +48,13 @@ public class DoUpdateNotification extends HttpServlet {
 		
 		Notification noti = new Notification();
 		if(title.isEmpty() || content.isEmpty()) {
-			request.setAttribute("message","Hãy Điền Đầy Đủ Thông Tin");
+			request.setAttribute("message","Hãy nhập đầy đủ thông tin");
 			request.getRequestDispatcher("/notification/create-notification.jsp").forward(request, response);
 		}else {
 			if(notiBO.updateNotification(request.getParameter("notiId"), title, content)){
 				response.sendRedirect(request.getContextPath()+"/notification");
 			}else{
-				request.setAttribute("message","Đã xảy ra lỗi ");
+				request.setAttribute("message","Đã xảy ra lỗi");
 				request.getRequestDispatcher("/notification/create-notification.jsp").forward(request, response);
 			}
 		}
